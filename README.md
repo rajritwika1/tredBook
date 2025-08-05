@@ -50,7 +50,7 @@
 
 ## 🙋‍♂️ Author
 **Role**: Freelance Full-Stack Developer  
-**Email**: rajritwika@gmail.com
+**Email**: rajritwika181@gmail.com
 
 For queries, collaborations, or freelance opportunities, feel free to reach out.
 
