@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Purchase bills</title>
+  <script src="https://kit.fontawesome.com/1e18fc97cb.js" crossorigin="anonymous"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f4f4f4;
+      padding: 10px;
+    }
+
+    .invoice-container {
+      max-width: 1000px;
+      margin: auto;
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 10px 0;
+    }
+
+    .top-bar h2 {
+      font-size: 24px;
+    }
+
+    .toggle-group {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .toggle-group label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+      margin: 15px 0;
+    }
+
+    .meta-grid input, .meta-grid select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .section-box {
+      background: #cafffa;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+    }
+
+    .billed-item {
+      background: #f1f1f1;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .billed-item-header {
+      display: flex;
+      justify-content: space-between;
+      font-weight: bold;
+    }
+
+    .billed-item-content {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .summary-grid div {
+      padding: 6px;
+      background: #ddd;
+      text-align: center;
+      border-radius: 4px;
+    }
+
+    .discount-charges {
+      background: #aefcf4;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .discount-charges h3 {
+      margin-bottom: 10px;
+    }
+
+    .discount-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .discount-row input {
+      padding: 6px;
+      width: 100%;
+    }
+
+    @media(max-width: 768px) {
+      .discount-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+     .section {
+      padding: 16px;
+      background-color: #d9fff9;
+      margin: 10px;
+      border-radius: 8px;
+    }
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .box, .field {
+      flex: 1;
+      min-width: 120px;
+      padding: 10px;
+      background: #f5f5f5;
+      border-radius: 6px;
+    }
+    .label {
+      font-weight: bold;
+      margin-bottom: 6px;
+      display: block;
+    }
+    .add-button, .action-button {
+      background-color: #ffa0a0;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .add-button:hover {
+      background-color: #ff7a7a;
+    }
+    .inline {
+      display: inline-block;
+      margin-right: 10px;
+    }
+    .field input {
+      width: 100%;
+      padding: 6px;
+    }
+    .total-section {
+      display: flex;
+      justify-content: space-between;
+      font-weight: bold;
+    }
+    .transport {
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .document-section .row {
+      justify-content: space-between;
+    }
+    @media (max-width: 600px) {
+      .row, .transport, .document-section .row {
+        flex-direction: column;
+      }
+    }
+    .adv-sec {
+  background: #999;
+  padding: 20px;
+  margin-top: 20px;
+}
+.bottom{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.bottom button {
+        padding: 10px 20px;
+        border: none;
+        background: #3498db;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+        }
+        .bottom button:hover {
+        background: #2980b9;
+        }
+        .hidden {
+        display: none;
+        }
+        .menu-toggle {
+        background: transparent;
+        font-size: 24px;
+        border: none;
+        cursor: pointer;
+        }
+
+.modal{
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.3);
+      z-index: 9999;
+      justify-content: center;
+      align-items: flex-start;
+ }
+  .modal.show{
+    display: flex;
+  }
+    .modal-content {
+      background-color: #a0fff3;
+      width: 90%;
+      max-width: 400px;
+      padding: 20px;
+      border-radius: 5px;
+      position: relative;
+    }
+
+    .modal-header {
+      background-color: #ddd;
+      padding: 10px;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-body {
+      margin-top: 10px;
+    }
+
+    .modal-body label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+
+    .modal-body input {
+      width: 100%;
+      padding: 8px;
+      background-color: #ddd;
+      border: none;
+      outline: none;
+      border-radius: 4px;
+    }
+
+    .modal-footer {
+      margin-top: 15px;
+      text-align: center;
+    }
+
+    .modal-footer button {
+      padding: 10px 30px;
+      background-color: #ddd;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close-btn {
+      cursor: pointer;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="invoice-container">
+
+  <!-- Header -->
+  <div class="top-bar">
+    <button onclick="window.location.href='purchase-dropdown.html'">⬅</button>
+    <h2>Purchase bills</h2>
+    <div class="toggle-group">
+      <select>
+        <option>Abc firm</option>
+      </select>
+    </div>
+    <div>reverse charge</div>
+    <i class="fa fa-cog"></i>
+  </div>
+
+  <!-- Invoice Meta -->
+  <div class="meta-grid">
+   
+    <select>
+        <option value="invoice-no.">
+            Inv 12
+        </option>
+    </select>
+    <input type="date" value="2024-12-10" />
+    <input type="time" value="17:15" />
+    <select>
+        <option value="pmt terms">
+            pmt terms
+        </option>
+        <option value="pmt terms">
+            due on recipt
+        </option>
+    </select>
+    <select>
+        <option value="pmt terms">
+            due date
+        </option>
+        <option value="pmt terms">
+            12-12-2024
+        </option>
+    </select>
+  </div>
+
+  <!-- Party Info -->
+  <div class="meta-grid">
+    <input type="text" placeholder="Party Name"/>
+    <input type="text" placeholder="Billing Name (Optional)"/>
+    <input type="text" placeholder="Phone Number"/>
+  </div>
+
+  <!-- Balance -->
+  <div style="margin: 10px 0;">Party Balance: <strong>$2250</strong></div>
+
+  <!-- Billed Items -->
+  <div class="section-box">
+    <div class="billed-item">
+      <div class="billed-item-header">
+        <div>#1 Sample Item 1</div>
+        <div>$250</div>
+      </div>
+      <div class="billed-item-content">
+        <div>
+         Item Subtotal: 1×200 = $200<br/>
+          Charges: $52<br/>
+          Discount(2%): -$2<br/>
+          Tax: 0%
+        </div>
+        <div style="text-align: right;">
+          Rate excl. tax<br/>
+          $250
+        </div>
+      </div>
+    </div>
+
+    <!-- Repeat second item -->
+    <div class="billed-item">
+      <div class="billed-item-header">
+        <div>#1 Sample Item 1</div>
+        <div>$250</div>
+      </div>
+      <div class="billed-item-content">
+        <div>
+          Subtotal: 1×200 = $200<br/>
+          Charges: $52<br/>
+          Discount(2%): -$2<br/>
+          Tax: 0%
+        </div>
+        <div style="text-align: right;">
+          Rate excl. tax<br/>
+          $250
+        </div>
+      </div>
+    </div>
+
+    <!-- Totals -->
+    <div class="summary-grid">
+      <div>Total Disc: $4</div>
+      <div>Total Qty: 2</div>
+      <div>Total Count: 0</div>
+      <div>Total Tax Amt: $0</div>
+      <div>Subtotal: 500</div>
+    </div>
+
+    <div class="summary-grid">
+      <div>(optional)</div>
+      <div>Scan</div>
+    </div>
+  </div>
+
+  <!-- Discount & Charges -->
+  <div class="discount-charges">
+    <h3>Discount and Charges</h3>
+
+    <div class="discount-row">
+      <label>Discount</label>
+      <input type="text" value="5%" />
+      <input type="text" value="$25" />
+    </div>
+
+    <div class="discount-row">
+      <div><strong>SAC: 254682</strong></div>
+      <input type="text" value="igst 3%" />
+      <input type="text" value="$103" />
+      <div><button>add sac</button></div>
+    </div>
+
+    <div class="discount-row">
+      <input type="text" value="Packing $100" />
+      <input type="text" value="igst 3%" />
+      <input type="text" value="$103" />
+      <button>add sac</button>
+    </div>
+
+    <div class="discount-row">
+      <input type="text" value="Adjustment $100" />
+      <input type="text" value="igst 3%" />
+      <input type="text" value="$103" />
+      <button>add sac</button>
+    </div>
+
+    <div style="text-align: right;">Round Off: <strong>$0.05</strong></div>
+  </div>
+   <div class="section">
+    <div class="label">Total amount</div>
+    <div class="box">$125</div>
+  </div>
+
+  <div class="section">
+    <div class="row">
+      <div class="box">additional field 1</div>
+      <div class="box">------------------------------------------</div>
+    </div>
+  </div>
+          <span><strong>Payments:</strong></span>
+
+     <div class="row">
+      <div class="field">
+        <div class="label">Cash:</div>
+        <div class="inline">🗑️</div>
+        <input type="text" value="$70" />
+      </div>
+      <div class="field">
+        <div class="label">Cheque:</div>
+        <div class="inline">🗑️</div>
+        <input type="text" placeholder="ref no." value="$70" />
+      </div>
+      <div class="field">
+        <div class="label">ABC Bank:</div>
+        <div class="inline">🗑️</div>
+        <input type="text" placeholder="ref no." value="$70" />
+      </div>
+    </div>
+    <div class="row">
+      <button class="add-button">+ add payment type</button>
+      <button class="action-button">link</button>
+      <button class="action-button">history</button>
+    </div>
+    <div class="total-section">
+      <span>Total Paid: 100</span>
+      <span>Balance: 20</span>
+    </div>
+  
+  <div class="section">
+    <span><strong>Transportation Details</strong></span>
+    <div class="transport">
+     <span><strong>State of Supply:</strong> Bihar ▾</span>
+      <button class="add-button" id="openModal()">add more</button>
+       <div class="modal-body" id="secondView" style="display: none;">
+        <div class="modal-header">
+      <span>Shipping details</span>
+      <span class="close-btn" onclick="closeModal()">x</span>
+    </div>
+      <label>transport name</label>
+      <input type="text" id="transport" />
+
+      <label>vehical no.</label>
+      <input type="text" id="vehicle" />
+
+      <label>delivery date</label>
+      <input type="date" id="date" />
+
+      <label>delivery location</label>
+      <input type="text" id="location" />
+
+      <label>field 5</label>
+      <input type="text" id="field5" />
+
+      <label>field 6</label>
+      <input type="text" id="field6" />
+
+      <div class="modal-footer">
+        <button onclick="submitFinal()">Save</button>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <div class="section document-section">
+    <div class="row">
+      <button class="add-button">add description</button>
+      <button class="add-button">add photo</button>
+    </div>
+    <div class="row">
+      <button class="add-button">add document</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <button class="add-button" onclick="openModal()">add shipping details</button>
+    <div id="shippingModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <span>Shipping details</span>
+      <span class="close-btn" onclick="closeModal()">x</span>
+    </div>
+
+    <!-- First Modal Body -->
+    <div class="modal-body" id="formView">
+      <label>name</label>
+      <input type="text" id="name" />
+
+      <label>phone no.</label>
+      <input type="text" id="phone" />
+
+      <label>address</label>
+      <input type="text" id="address" />
+
+      <div class="modal-footer">
+        <button>Save</button>
+      </div>
+    </div>
+
+    <!-- Second Modal Body -->
+   
+  </div>
+</div>
+
+  </div>
+   <div class="adv-sec">adv sec</div>
+
+<div class="bottom">
+    <button>delete</button>
+    <button>save</button>
+</div>
+</div>
+ 
+<script>
+  function openModal() {
+    const modal = document.getElementById("shippingModal");
+    modal.classList.add("show");
+  }
+
+  function closeModal() {
+    const modal = document.getElementById("shippingModal");
+    modal.classList.remove("show");
+    document.getElementById("formView").style.display = "block";
+    document.getElementById("secondView").style.display = "none";
+  }
+
+  function showSecondForm() {
+    document.getElementById("formView").style.display = "none";
+    document.getElementById("secondView").style.display = "block";
+  }
+
+  function submitFinal() {
+    alert("Shipping details saved!");
+    closeModal();
+  }
+
+  // Optional: for debugging
+  console.log("Script loaded");
+</script>
+
+</body>
+</html>

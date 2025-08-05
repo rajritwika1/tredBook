@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tredbook - GST Billing Software</title>
+    <script src="https://kit.fontawesome.com/1e18fc97cb.js" crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+        }
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            flex-wrap: wrap;
+        }
+        header img {
+            width: 50px;
+        }
+        header h1 {
+            font-size: 20px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        header div {
+            margin-left: auto;
+            display: flex;
+            gap: 10px;
+        }
+        header a {
+            text-decoration: none;
+            padding: 8px 14px;
+            border-radius: 5px;
+            color: white;
+            font-size: 14px;
+            text-align: center;
+        }
+        .login-btn {
+            background-color: #3b82f6;
+        }
+        .signup-btn {
+            background-color: #10b981;
+        }
+
+        /* Main Section */
+        .main-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+        .main-text {
+            max-width: 90%;
+        }
+        .main-text h2 {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .main-text p {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .main-image img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            margin-top: 20px;
+        }
+
+        /* Responsive */
+        @media (min-width: 768px) {
+            .main-section {
+                flex-direction: row;
+                text-align: left;
+                justify-content: space-around;
+            }
+            .main-text {
+                max-width: 50%;
+            }
+            .main-image img {
+                max-width: 400px;
+                margin-top: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <img src="image/logo.png" alt="Logo">
+        <h1>Tredbook</h1>
+        <div>
+            <a href="home/home.html" class="login-btn">Login</a>
+            <a href="home/home.html" class="signup-btn">Signup</a>
+        </div>
+    </header>
+
+    <!-- Main Section -->
+    <section class="main-section">
+        <div class="main-text">
+            <h2>GST Billing Software in India for Small Businesses</h2>
+            <p>
+                Manage your business professionally with <strong>Tredbook</strong>, India’s leading software for billing, inventory, and accounting. 
+                Join 1 Cr+ satisfied SMEs in India who trust <strong>Tredbook</strong>.
+            </p>
+        </div>
+        <div class="main-image">
+            <img src="image/billing.png" alt="Billing Software Image">
+        </div>
+    </section>
+</body>
+</html>

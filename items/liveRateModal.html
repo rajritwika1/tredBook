@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Live Rate Update Modal</title>
+  <style>
+    /* Overlay */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(8px);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    /* Modal Box */
+    .modal-content {
+      background: #fff;
+      width: 90%;
+      max-width: 700px;
+      border-radius: 10px;
+      overflow: hidden;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .modal-header {
+      background: #e0e0e0;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: bold;
+    }
+
+    .modal-header button {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .date-box {
+      padding: 0.5rem;
+      background: #e0e0e0;
+      margin: 0.5rem 1rem;
+      width: fit-content;
+      border-radius: 5px;
+    }
+
+    .tab-buttons {
+      display: flex;
+      margin: 0 1rem;
+    }
+
+    .tab-buttons button {
+      flex: 1;
+      padding: 0.6rem;
+      background: #ddd;
+      border: none;
+      cursor: pointer;
+    }
+
+    .tab-buttons .active {
+      background: #b8f6f6;
+      font-weight: bold;
+    }
+
+    .tab-content {
+      padding: 1rem;
+      background: #aefcfc;
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .rate-list {
+      display: flex;
+      justify-content: space-between;
+      margin: 0.5rem 0;
+    }
+
+    .rate-input {
+      padding: 0.4rem;
+      width: 100px;
+      background: #ddd;
+      border: none;
+      text-align: right;
+    }
+
+    .modal-footer {
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem;
+      background: #f0f0f0;
+    }
+
+    .modal-footer button {
+      padding: 0.6rem 1.5rem;
+      border: none;
+      background: #ccc;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    @media (max-width: 600px) {
+      .rate-list {
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+
+      .rate-input {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Trigger Button Example -->
+<button onclick="openRateModal()">Open Rate Update</button>
+
+<!-- Modal -->
+<div id="rateModal" class="modal-overlay">
+  <div class="modal-content">
+    <div class="modal-header">
+      <span>⬅ Live Rate Updates</span>
+      <button onclick="closeRateModal()">×</button>
+    </div>
+    <div class="date-box">Date: 15-12-24</div>
+    <div class="tab-buttons">
+      <button id="itemTab" class="active" onclick="showRateTab('item')">Item Wise Update</button>
+      <button id="categoryTab" onclick="showRateTab('category')">Category Wise Update</button>
+    </div>
+
+    <!-- Tab Content -->
+    <div class="tab-content" id="itemContent">
+      <h4>List of Live Rate Items</h4>
+      <div class="rate-list"><span>Item Name 1</span><input type="text" class="rate-input" value="$200" /></div>
+      <div class="rate-list"><span>Item Name 2</span><input type="text" class="rate-input" value="$200" /></div>
+      <div class="rate-list"><span>Item Name 3</span><input type="text" class="rate-input" value="$200" /></div>
+      <div class="rate-list"><span>Item Name 4</span><input type="text" class="rate-input" value="$200" /></div>
+      <div class="rate-list"><span>Item Name 5</span><input type="text" class="rate-input" value="$200" /></div>
+    </div>
+
+    <div class="tab-content" id="categoryContent" style="display: none;">
+      <h4>List of Live Rate Items</h4>
+      <div class="rate-list"><span>Item Category 1</span><input type="text" class="rate-input" value="$200" /></div>
+      <div class="rate-list"><span>Item Category 2</span><input type="text" class="rate-input" value="$200" /></div>
+      <div class="rate-list"><span>Item Category 3</span><input type="text" class="rate-input" value="$200" /></div>
+      <div class="rate-list"><span>Item 4</span><input type="text" class="rate-input" value="$200" /></div>
+      <div class="rate-list"><span>Item 5</span><input type="text" class="rate-input" value="$200" /></div>
+    </div>
+
+    <!-- Footer -->
+    <div class="modal-footer">
+      <button onclick="closeRateModal()">Cancel</button>
+      <button onclick="updateRates()">Update</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openRateModal() {
+    document.getElementById('rateModal').style.display = 'flex';
+  }
+
+  function closeRateModal() {
+    document.getElementById('rateModal').style.display = 'none';
+  }
+
+  function showRateTab(type) {
+    const itemTab = document.getElementById('itemTab');
+    const categoryTab = document.getElementById('categoryTab');
+    const itemContent = document.getElementById('itemContent');
+    const categoryContent = document.getElementById('categoryContent');
+
+    if (type === 'item') {
+      itemTab.classList.add('active');
+      categoryTab.classList.remove('active');
+      itemContent.style.display = 'block';
+      categoryContent.style.display = 'none';
+    } else {
+      categoryTab.classList.add('active');
+      itemTab.classList.remove('active');
+      categoryContent.style.display = 'block';
+      itemContent.style.display = 'none';
+    }
+  }
+
+  function updateRates() {
+    alert("Rates updated!");
+    // You can also capture values using JS here
+  }
+</script>
+</body>
+</html>

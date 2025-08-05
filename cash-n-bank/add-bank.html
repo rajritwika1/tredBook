@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add fixed assets</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: transparent;
+            color: black;
+            padding: 10px 20px;
+        }
+        .header span {
+            font-size: 1.5em;
+        }
+        .sub-cont {
+            margin-bottom: 10px;
+        }
+        .input-field {
+            width: 80%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        .footer {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .dropbtn {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="modal" id="addFixedAssetsModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="header">
+            <button class="back-btn" onclick="closeModal()">⬅</button>
+            <span><strong>Add fixed assets</strong></span>
+        </div>
+        <div class="container">
+            <div class="sub-cont">
+                <span>fixed assets name</span>
+                <input type="text" class="input-field" placeholder="Enter fixed assets name">
+            </div>
+            <div class="sub-cont">
+                <span>assets code</span>
+                <input type="number" class="input-field" placeholder="Enter assets code">
+            </div>
+            <div class="sub-cont">
+                <span>hsn code</span>
+                <input type="number" class="input-field" placeholder="Enter hsn code">
+            </div>
+            <span>assets details</span>
+            <div class="sub-cont">
+                <span>Opening qty</span>
+                <input type="text" class="input-field" placeholder="Enter opening qty">
+            </div>
+            <div class="sub-cont">
+                <span>at price/unit</span>
+                <input type="number" class="input-field" placeholder="Enter at price/unit">
+            </div>
+            <div class="sub-cont">
+                <span>as of date</span>
+                <input type="date" class="input-field">
+            </div>
+        <div class="footer">
+            <button class="dropbtn">save & new</button>
+            <button class="dropbtn">save</button>
+        </div>
+        </div>
+    </div>
+    <script>
+    </script>
+</body>
+</html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Company</title>
+  <script src="https://kit.fontawesome.com/1e18fc97cb.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+      padding: 0px;
+    }
+  header{
+    position: relative;
+    align-items: center;
+    display: flex;
+    padding: 10px;
+   }
+   header h4{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    font-size: 1.2rem;
+
+    
+   }
+    header img{
+      width: 40px;
+      height: 40px;
+      background: #ccc;
+      object-fit: cover;
+    }
+   
+      .container {
+      max-width: 900px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .form-tabs {
+      display: flex;
+      margin-bottom: 20px;
+    }
+
+    .form-tabs button {
+      flex: 1;
+      padding: 12px;
+      background: #ccc;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .form-tabs button.active-tab {
+      background: #ff88e0;
+    }
+
+    .step-form {
+      display: none;
+    }
+
+    .step-form.active {
+      display: block;
+    }
+
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .form-group {
+      flex: 1 1 45%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group.full {
+      flex: 1 1 100%;
+    }
+
+    input, textarea, select {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-top: 5px;
+    }
+
+    .signature-actions, .form-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .form-actions button, .signature-actions button {
+      padding: 10px;
+      flex: 1;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .sig-btn.red { background: #f36f6f; }
+    .sig-btn.pink { background: #ff9eb3; }
+    .sig-btn.gray { background: #ccc; color: #000; }
+
+    .gst-banner {
+      background: black;
+      color: white;
+      padding: 6px 10px;
+      display: inline-block;
+      font-size: 14px;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+    <header>
+        <img src="image" alt="company logo">
+        <h4>Create Company</h4>
+    </header>
+  <div class="container">
+    <div class="form-tabs">
+      <button id="tab-basic" class="active-tab">Basic Detail</button>
+      <button id="tab-business">Business Detail</button>
+    </div>
+
+    <div id="step-1" class="step-form active">
+      <div class="form-row">
+        <div class="form-group full">
+          <label for="business-name">Business Name*</label>
+          <input type="text" id="business-name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="business-phone">Phone No.*</label>
+          <input type="number" id="business-phone" required>
+        </div>
+
+        <div class="form-group">
+          <label for="secondary-phone">Ph No 2</label>
+          <input type="number" id="secondary-phone">
+        </div>
+
+        <div class="form-group full">
+          <label for="business-address">Business Address*</label>
+          <input type="text" id="business-address" required>
+        </div>
+
+        <div class="form-group">
+          <label for="business-email">Email ID*</label>
+          <input type="email" id="business-email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="business-description">Business Description</label>
+          <textarea id="business-description" rows="5"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="signature">Signature*</label>
+          <input type="file" id="signature" accept="image/*" required>
+          <div class="signature-actions">
+            <button type="button" onclick="document.getElementById('signature').click()" class="sig-btn red">Change</button>
+            <button type="button" onclick="uploadSignature()" class="sig-btn pink">Upload</button>
+            <button type="button" onclick="removeSignature()" class="sig-btn gray">Remove</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="gst-banner">GST registration starting just 249/-</div>
+
+      <div class="form-actions">
+        <button id="next-step">Next</button>
+        <button class="cancel">Cancel</button>
+      </div>
+    </div>
+
+    <div id="step-2" class="step-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="gstin">GSTIN*</label>
+          <input type="text" id="gstin" required>
+        </div>
+        <div class="form-group">
+          <label for="business-type">Business Type*</label>
+          <select id="business-type" required>
+            <option value="">Select</option>
+            <option value="retail">Retail</option>
+            <option value="wholesale">Wholesale</option>
+            <option value="distributor">Distributor</option>
+            <option value="service">Service</option>
+            <option value="manufacturing">Manufacturing</option>
+            <option value="others">Others</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="state">State*</label>
+          <select id="state" required>
+            <option value="">Select</option>
+            <option value="AP">Andhra Pradesh</option>
+            <option value="AN">Andaman & Nicobar Islands</option>
+            <option value="ARP">Arunachal Pradesh</option>
+            <option value="AS">Assam</option>
+            <option value="BR">Bihar</option>
+            <option value="CDG">Chandigarh</option>
+            <option value="CHH">Chhatisgarh</option>
+            <option value="DN">Dadra & Nagar Haveli & Daman & Diu</option>
+            <option value="DL">Delhi</option>
+            <option value="GOA">Goa</option>
+            <option value="GJ">Gujarat</option>
+            <option value="HR">Haryana</option>
+            <option value="HP">Himachal Pradesh</option>
+            <option value="JK">Jammu & Kashmir</option>
+            <option value="JR">Jharkhand</option>
+            <option value="KN">Karnataka</option>
+            <option value="KR">Kerala</option>
+            <option value="LK">Ladakh</option>
+            <option value="LD">Lakshadweep</option>
+            <option value="MP">Madhya Pradesh</option>
+            <option value="MH">Maharashtra</option>
+            <option value="MN">Manipur</option>
+            <option value="MG">meghalaya</option>
+            <option value="MZ">Mizoram</option>
+            <option value="NG">Nagaland</option>
+            <option value="OD">Odisha</option>
+            <option value="PC">Puducherry</option>
+            <option value="PJ">Punjab</option>
+            <option value="RJ">Rajasthan</option>
+            <option value="SK">Sikkim</option>
+            <option value="TN">Tamil Nadu</option>
+            <option value="TL">Telangana</option>
+            <option value="TR">Tripura</option>
+            <option value="UP">Uttar Pradesh</option>
+            <option value="UT">Uttarakhand</option>
+            <option value="WB">West Bengal</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="business-category">Business Category*</label>
+          <select id="business-category" required>
+            <option value="">Select</option>
+            <option value="op">Accounting & CA</option>
+            <option value="op">Interior Designer</option>
+            <option value="op">Automobiles/Auto parts</option>
+            <option value="op">Salon & Spa</option>
+            <option value="op">Liquor Store</option>
+            <option value="op">Book/Stationary store</option>
+            <option value="op">Construction Materials & Equipment</option>
+            <option value="op">Repairing/Plumbing/Electrician</option>
+            <option value="op">Chemicals & Fertilizers</option>
+            <option value="op">Computer Equipments & Softwares</option>
+            <option value="op">Electrical & Electronics Equipments</option>
+            <option value="op">Fashion Accessory/Cosmetics</option>
+            <option value="op">Tailoring/Boutique</option>
+            <option value="op">Fruit & Vegetable</option>
+            <option value="op">Kirana/General Merchant</option>
+            <option value="op">FMCG Products</option>
+            <option value="op">Dairy Farm Products/Poultry</option>
+            <option value="op">Furniture</option>
+            <option value="op">Garment/Fashion & Hosiery</option>
+            <option value="op">Jewellery & Gems</option>
+            <option value="op">Pharmacy/Medical</option>
+            <option value="op">Hardware Store</option>
+            <option value="op">Industrial Machinery & Equipment</option>
+            <option value="op">Mobile & Accessories</option>
+            <option value="op">Nursery/Plants</option>
+            <option value="op">Petroleum Bulk Stations & Terminals/Petrol</option>
+            <option value="op">Restaurant/Hotel</option>
+            <option value="op">Footwear</option>
+            <option value="op">Paper & Paper Products</option>
+            <option value="op">Sweet Shop/Bakery</option>
+            <option value="op">Gifts & Toys</option>
+            <option value="op">Laundry/Washing/Dry clean</option>
+            <option value="op">Coaching & Training</option>
+            <option value="op">Renting & Leasing</option>
+            <option value="op">Fitness Center</option>
+            <option value="op">Oil & Gas</option>
+            <option value="op">Real Estate</option>
+            <option value="op">NGO & Charitable trust</option>
+            <option value="op">Tours & Travels</option>   
+          </select>
+        </div>
+
+        <div class="form-group full">
+          <label for="pincode">Pincode</label>
+          <input type="number" id="pincode">
+        </div>
+      </div>
+      <div class="gst-banner">GST registration starting just 249/-</div>
+
+      <div class="form-actions">
+        <button id="create">Create</button>
+        <button id="prev-step">Back</button>
+        <button class="cancel">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const tabBasic = document.getElementById("tab-basic");
+    const tabBusiness = document.getElementById("tab-business");
+    const step1 = document.getElementById("step-1");
+    const step2 = document.getElementById("step-2");
+
+    tabBasic.addEventListener("click", () => {
+      step1.classList.add("active");
+      step2.classList.remove("active");
+      tabBasic.classList.add("active-tab");
+      tabBusiness.classList.remove("active-tab");
+    });
+
+    tabBusiness.addEventListener("click", () => {
+      step2.classList.add("active");
+      step1.classList.remove("active");
+      tabBusiness.classList.add("active-tab");
+      tabBasic.classList.remove("active-tab");
+    });
+
+    document.getElementById("next-step").addEventListener("click", () => {
+      step1.classList.remove("active");
+      step2.classList.add("active");
+      tabBusiness.classList.add("active-tab");
+      tabBasic.classList.remove("active-tab");
+    });
+
+    document.getElementById("prev-step").addEventListener("click", () => {
+      step2.classList.remove("active");
+      step1.classList.add("active");
+      tabBasic.classList.add("active-tab");
+      tabBusiness.classList.remove("active-tab");
+    });
+
+    async function uploadSignature() {
+  const fileInput = document.getElementById("signature");
+  const file = fileInput.files[0];
+
+  if (!file) {
+    alert("Please select a signature to upload.");
+    return;
+  }
+
+  const storageRef = ref(storage, `signatures/${file.name}`);
+  
+  try {
+    const snapshot = await uploadBytes(storageRef, file);
+    const downloadURL = await getDownloadURL(snapshot.ref);
+
+    document.getElementById("upload-status").textContent = "Uploaded Successfully!";
+    console.log("Signature URL:", downloadURL);
+    
+    // You can store the URL in Firestore or Realtime DB if needed.
+  } catch (error) {
+    console.error("Upload failed:", error);
+    document.getElementById("upload-status").textContent = "Upload failed.";
+  }
+}
+
+function removeSignature() {
+  document.getElementById("signature").value = "";
+  document.getElementById("upload-status").textContent = "Signature removed.";
+}
+
+  </script>
+</body>
+</html>

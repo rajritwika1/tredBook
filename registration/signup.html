@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <script src="https://kit.fontawesome.com/1e18fc97cb.js" crossorigin="anonymous"></script>
+    <style>
+        /* Your existing styles */
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f3f4f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+h2 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 6px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+h3 {
+    margin: 10px 0;
+    color: #666;
+}
+
+a {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Signup</h2>
+
+        <input type="email" id="signup-email" placeholder="Email">
+        <input type="text" id="signup-username" placeholder="Username">
+        <input type="password" id="signup-password" placeholder="Password">
+        <input type="text" id="signup-phone" placeholder="Phone Number">
+        <button id="signup-btn">Signup</button>
+
+        <p style="margin-top: 8px;">Already have an account? <a href="login.html">Login</a></p>
+    </div>
+
+    <script type="module">
+        import { signUpWithEmail } from './js/firebase.js';
+
+        document.getElementById("signup-btn").addEventListener("click", () => {
+            const username = document.getElementById("signup-username").value.trim();
+            const email = document.getElementById("signup-email").value.trim();
+            const password = document.getElementById("signup-password").value.trim();
+            const phone = document.getElementById("signup-phone").value.trim();
+
+            if (!username || !email || !password || !phone) {
+                alert("Please enter all fields.");
+                return;
+            }
+            if(!password.includes('@')){
+                alert("enter valid passowrd")
+                return;
+            }
+            if(password.length<8){
+                alert("password must be 8 digits long")
+                return;
+            }
+            if(phone.length!==10){
+                alert("phone number should be 10 digit")
+                return;
+            }
+
+            signUpWithEmail(username, email, password, phone);
+        });
+    </script>
+</body>
+</html>

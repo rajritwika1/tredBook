@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Party Settings</title>
+    <script src="https://kit.fontawesome.com/1e18fc97cb.js" crossorigin="anonymous"></script>
+    <style>
+.main{
+    display: flex;
+}
+.navbar{
+    display: flex;
+    flex-direction: row;
+}
+.header{
+    display: flex;
+}
+.sidebar {
+  width: 250px;
+  background: #333;
+  color: white;
+  padding: 15px;
+  transition: all 0.3s;
+}
+
+.sidebar .company-title {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.nav li {
+  list-style: none;
+  margin: 10px 0;
+}
+
+.nav li a {
+  color: white;
+  text-decoration: none;
+  background: black;
+  display: block;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.adv-sec {
+  background: #999;
+  padding: 20px;
+  margin-top: 20px;
+}
+.hidden {
+  display: none;
+}
+.main {
+  flex: 1;
+  background: transparent;
+  padding: 20px;
+  position: relative;
+}
+
+.header {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+#searchIcon {
+  font-size: 20px;
+  cursor: pointer;
+  color: #555;
+  padding: 8px;
+}
+
+#searchInput {
+  width: 0;
+  opacity: 0;
+  padding: 6px 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-left: 5px;
+  transition: all 0.3s ease;
+}
+
+/* Active state when clicked */
+.search-container.active #searchInput {
+  width: 150px;
+  opacity: 1;
+}
+
+.party-settings-container {
+  display: flex;
+  padding: 20px;
+  gap: 40px;
+}
+
+.settings-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.arrow {
+  font-size: 20px;
+  cursor: pointer;
+  color: #333;
+}
+
+.adv-sec {
+  width: 200px;
+  background: #dcdcdc;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Toggle Switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 42px;
+  height: 22px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  background-color: #333;
+  border-radius: 22px;
+  top: 0; left: 0;
+  right: 0; bottom: 0;
+  transition: 0.4s;
+}
+
+.slider::before {
+  content: "";
+  position: absolute;
+  height: 16px;
+  width: 16px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #4caf50;
+}
+
+input:checked + .slider::before {
+  transform: translateX(20px);
+}
+
+/* Buttons */
+.buttons {
+  display: flex;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn.save {
+  background-color: #ddd;
+}
+
+.btn.cancel {
+  background-color: #ccc;
+}
+</style>
+</head>
+<body>
+    
+    <div class="main">
+    <div class="sidebar" id="sidebar">
+      <h3 class="company-title">Company Name Here</h3>
+      <ul class="nav">
+        <li><a href="../dashboard/dashboard.html">Dashboard</a></li>
+        <li><a href="../home/home.html">Home</a></li>
+        <li><a href="../party/parties.html">Parties</a></li>
+        <li><a href="../items/items.html">Items</a></li>
+        <li><a href="#">Sales</a></li>
+        <li><a href="#">Purchase</a></li>
+        <li><a href="#">Cash & Bank</a></li>
+        <li><a href="#">Reports</a></li>
+        <li><a href="#">Utilities</a></li>
+        <li><a href="#">Extras</a></li>
+        <li><a href="#">Settings</a></li>
+      </ul>
+      <div class="adv-sec">adv sec</div>
+    </div>
+
+    <div class="navbar">
+        <div class="header">
+            <button class="menu-toggle" id="menuToggle">:</button>
+            <button class="btn back" onclick="window.location.href='parties.html'">⬅️</button>
+            <h3>Party Settings</h3>
+            <div class="search-container" id="searchContainer">
+             <i class="fa fa-search" id="searchIcon"></i>
+             <input type="text" placeholder="Search..." id="searchInput">
+            </div>
+
+        </div>
+    </div>
+      <div class="party-settings-container">
+        <form class="settings-form">
+    <div class="form-group">
+      <label>GSTIN Number</label>
+      <label class="switch">
+        <input type="checkbox">
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label>party grouping</label>
+      <label class="switch">
+        <input type="checkbox">
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label>party shipping address</label>
+      <label class="switch">
+        <input type="checkbox">
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label>print shipping address</label>
+      <label class="switch">
+        <input type="checkbox">
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label>invite parties to add themselves</label>
+      <label class="switch">
+        <input type="checkbox">
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label>loyalty points</label>
+      <label class="switch">
+        <input type="checkbox">
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label>party additional fields</label>
+      <span class="arrow">&gt;</span>
+    </div>
+
+    <div class="buttons">
+      <button type="submit" class="btn save">save</button>
+      <button type="button" class="btn cancel">cancel</button>
+    </div>
+  </form>
+
+  <div class="adv-sec">
+    adv sec
+  </div>
+</div>
+
+    </div>
+    <script src="js/script.js" type="module"></script>
+</body>
+</html>

@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Party Details</title>
+  <script src="https://kit.fontawesome.com/1e18fc97cb.js" crossorigin="anonymous"></script>
+   <style>
+    /* styles.css */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #f5f5f5;
+}
+.plus-btn {
+    font-size: 20px;
+  background-color: transparent;
+  color: black;
+  font-weight: bold;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: inline-block;
+
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal-content {
+  background-color: transparent;
+  margin: 5% auto;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  color: white;
+  max-width: 800px;
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 28px;
+  cursor: pointer;
+  color: black;
+  background: white;
+  border-radius: 50%;
+  padding: 4px 10px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 20px;
+  margin: 10px 0 30px;
+}
+
+.tile {
+  text-align: center;
+  background: #e0e0e0;
+  color: black;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.tile:hover {
+  background: #d6d6d6;
+  transform: scale(1.05);
+}
+
+.tile i {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 250px;
+  background: #333;
+  color: white;
+  padding: 15px;
+  transition: all 0.3s;
+}
+
+.sidebar .company-title {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.nav li {
+  list-style: none;
+  margin: 10px 0;
+}
+
+.nav li a {
+  color: white;
+  text-decoration: none;
+  background: black;
+  display: block;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.adv-sec {
+  background: #999;
+  padding: 20px;
+  margin-top: 20px;
+}
+.menu-toggle {
+  background: transparent;
+  font-size: 24px;
+  border: none;
+  cursor: pointer;
+}
+.hidden{
+  display: none;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.party-controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.back {
+  background-color:transparent;
+  color: white;
+}
+
+.red {
+  background-color: #ffb3b3;
+}
+
+.blue {
+  background-color: #a8fdfd;
+}
+
+.green {
+  background-color: #ccfff1;
+}
+
+.party-summary {
+  background-color: transparent;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.search-bar {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
+  font-size: 1rem;
+}
+
+.search-bar .btn.filter {
+  background-color: #a8fdfd;
+  border-radius: 0 5px 5px 0;
+  padding: 10px 15px;
+}
+
+.cards {
+  background-color: transparent;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.card {
+  display: flex;
+  justify-content: space-between;
+  background-color: #fcecec;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.info p {
+  margin-bottom: 5px;
+}
+
+.meta {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 0.9rem;
+}
+
+.icons {
+  margin-top: 10px;
+  font-size: 1.2rem;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.badge.unpaid {
+  background-color: #f4c7c3;
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: black;
+  font-weight: bold;
+}
+
+.adv-section {
+  background-color: #ccc;
+  padding: 20px;
+  text-align: center;
+  margin-top: 20px;
+  border-radius: 5px;
+}
+
+.popup-menu {
+  display: none;
+  position: absolute;
+  top: 80px;
+  right: 40px;
+  background-color: #b3a7ff;
+  color: black;
+  padding: 15px;
+  border-radius: 10px;
+  z-index: 1000;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+  width: 180px;
+}
+
+.popup-menu.visible {
+  display: block;
+}
+
+.popup-menu p {
+  margin: 10px 0;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    overflow-x: auto;
+  }
+
+  .main-content {
+    padding: 10px;
+  }
+
+  .party-controls,
+  .search-bar {
+    flex-direction: column;
+  }
+
+  .card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .meta {
+    text-align: left;
+    margin-top: 10px;
+  }
+}
+   </style>
+</head>
+<body>
+  <div class="container">
+       <div class="sidebar" id="sidebar">
+      <h3 class="company-title">Company Name Here</h3>
+      <ul class="nav">
+        <li><a href="../dashboard/dashboard.html">Dashboard</a></li>
+        <li><a href="../home/home.html">Home</a></li>
+        <li><a href="../party/parties.html">Parties</a></li>
+        <li><a href="../items/items.html">Items</a></li>
+        <li><a href="#">Sales</a></li>
+        <li><a href="#">Purchase</a></li>
+        <li><a href="#">Cash & Bank</a></li>
+        <li><a href="#">Reports</a></li>
+        <li><a href="#">Utilities</a></li>
+        <li><a href="#">Extras</a></li>
+        <li><a href="#">Settings</a></li>
+      </ul>
+      <div class="adv-sec">adv sec</div>
+    </div>
+
+    <main class="main-content">
+      <div class="party-controls">
+        <button class="menu-toggle" id="menuToggle">:</button>
+        <button class="btn back" onclick="window.location.href='parties.html'">⬅️</button>
+        <button class="btn blue">Party details</button>
+        <button class="btn red">Take Payment</button>
+        <button id="openModalBtn" class="plus-btn">+</button>
+
+<!-- Modal/Dialog Box -->
+<div id="transactionModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" id="closeModalBtn">&times;</span>
+
+    <h2>Sale Transaction</h2>
+    <div class="grid">
+      <div class="tile" onclick="handleClick('sale invoices')">
+        <i class="fas fa-file-invoice-dollar"></i>
+        <p>sale invoices</p>
+      </div>
+      <div class="tile" onclick="handleClick('payment in')">
+        <i class="fas fa-money-bill-wave"></i>
+        <p>payment in</p>
+      </div>
+      <div class="tile" onclick="handleClick('sale return')">
+        <i class="fas fa-undo"></i>
+        <p>sale return/cr note</p>
+      </div>
+      <div class="tile" onclick="handleClick('sales order')">
+        <i class="fas fa-shopping-cart"></i>
+        <p>sales order</p>
+      </div>
+      <div class="tile" onclick="handleClick('estimate')">
+        <i class="fas fa-calculator"></i>
+        <p>estimate/quotation</p>
+      </div>
+      <div class="tile" onclick="handleClick('proforma')">
+        <i class="fas fa-file-invoice"></i>
+        <p>proforma invoice</p>
+      </div>
+      <div class="tile" onclick="handleClick('delivery')">
+        <i class="fas fa-truck"></i>
+        <p>delivery challan</p>
+      </div>
+    </div>
+
+    <h2>Purchase Transaction</h2>
+    <div class="grid">
+      <div class="tile" onclick="handleClick('purchase')">
+        <i class="fas fa-shopping-basket"></i>
+        <p>purchase</p>
+      </div>
+      <div class="tile" onclick="handleClick('payment out')">
+        <i class="fas fa-money-check-alt"></i>
+        <p>payment out</p>
+      </div>
+      <div class="tile" onclick="handleClick('purchase return')">
+        <i class="fas fa-reply"></i>
+        <p>purchase return/dr note</p>
+      </div>
+      <div class="tile" onclick="handleClick('purchase order')">
+        <i class="fas fa-file-alt"></i>
+        <p>purchase order</p>
+      </div>
+    </div>
+
+    <h2>Other Transaction</h2>
+    <div class="grid">
+      <div class="tile" onclick="handleClick('expense')">
+        <i class="fas fa-receipt"></i>
+        <p>expense</p>
+      </div>
+      <div class="tile" onclick="handleClick('party to party')">
+        <i class="fas fa-user-friends"></i>
+        <p>party to party</p>
+      </div>
+    </div>
+  </div>
+</div>
+        <button class="btn red">Add Sale</button>
+        <button class="btn green">✏️</button>
+        <button class="btn green three-dot">⋮</button>
+      </div>
+
+      <div class="popup-menu">
+        <p><strong>Task &amp; reminder</strong></p>
+        <p>send payment reminder</p>
+        <p>chat on whatsapp</p>
+        <p>send pdf</p>
+        <p><strong>send xls</strong></p>
+      </div>
+
+      <div class="party-summary">
+        <p>Customer Name Here</p>
+        <p>Address</p>
+        <p>Phone No.</p>
+        <p>GSTIN</p>
+        <p>Receivable Amount: $100.00</p>
+        <p>Credit Limit: Not Set</p>
+      </div>
+
+      <div class="search-bar">
+        <input type="text" placeholder="Search party details" />
+        <button class="btn filter">🔽</button>
+      </div>
+
+      <div class="cards">
+        <div class="card unpaid">
+          <div class="info">
+            <p>Transaction Type: <span class="badge unpaid">Unpaid</span></p>
+            <p>Total: $500</p>
+            <p>Balance: $200</p>
+          </div>
+          <div class="meta">
+            <p>#In 05<br>10-05-24 - 01:30 AM<br>Due: 10-06-24</p>
+            <div class="icons">🖨️ 🔁 ☰</div>
+          </div>
+        </div>
+
+        <div class="card unpaid">
+          <div class="info">
+            <p>Transaction Type: <span class="badge unpaid">Unpaid</span></p>
+            <p>Total: $500</p>
+            <p>Balance: $200</p>
+          </div>
+          <div class="meta">
+            <p>#In 05<br>10-05-24 - 01:30 AM<br>Due: 10-06-24</p>
+            <div class="icons">🖨️ 🔁 ☰</div>
+          </div>
+        </div>
+
+        <div class="card unpaid">
+          <div class="info">
+            <p>Transaction Type: <span class="badge unpaid">Unpaid</span></p>
+            <p>Total: $500</p>
+            <p>Balance: $200</p>
+          </div>
+          <div class="meta">
+            <p>#In 05<br>10-05-24 - 01:30 AM<br>Due: 10-06-24</p>
+            <div class="icons">🖨️ 🔁 ☰</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="adv-section">adv section</div>
+    </main>
+  </div>
+  <script src="js/script.js" type="module"></script>
+  <script>
+    // script.js
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Tab switching functionality
+  const tabs = document.querySelectorAll(".tab");
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      tabs.forEach((t) => t.classList.remove("active"));
+      tab.classList.add("active");
+      console.log(`Switched to tab: ${tab.textContent.trim()}`);
+    });
+  });
+
+  // Quick link buttons
+  const quickButtons = document.querySelectorAll(".quick-btn");
+  quickButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      alert(`Clicked: ${btn.textContent.trim()}`);
+    });
+  });
+
+  // Top bar buttons (Add New Party, Notifications, etc.)
+  const topBarButtons = document.querySelectorAll(".top-bar .btn");
+  topBarButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      alert(`Action: ${btn.textContent.trim()}`);
+    });
+  });
+
+  // Simulated card data interaction
+  const cards = document.querySelectorAll(".card");
+  cards.forEach((card, index) => {
+    card.addEventListener("click", () => {
+      alert(`Card ${index + 1} clicked`);
+    });
+  });
+
+  // Three-dot menu toggle
+  const threeDotBtn = document.querySelector(".btn.green.three-dot");
+  const popupMenu = document.querySelector(".popup-menu");
+
+  if (threeDotBtn && popupMenu) {
+    threeDotBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      popupMenu.classList.toggle("visible");
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!popupMenu.contains(e.target) && !threeDotBtn.contains(e.target)) {
+        popupMenu.classList.remove("visible");
+      }
+    });
+  }
+});
+
+  </script>
+</body>
+</html>

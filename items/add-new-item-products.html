@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add new item product</title>
+    <script src="https://kit.fontawesome.com/1e18fc97cb.js" crossorigin="anonymous"></script>
+<style>
+ *{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+.sidebar {
+  width: 250px;
+  background: #333;
+  color: white;
+  padding: 15px;
+  transition: all 0.3s;
+}
+
+.sidebar .company-title {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.nav li {
+  list-style: none;
+  margin: 10px 0;
+}
+
+.nav li a {
+  color: white;
+  text-decoration: none;
+  background: black;
+  display: block;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.adv-sec {
+  background: #999;
+  padding: 20px;
+  margin-top: 20px;
+}
+.hidden {
+  display: none;
+}
+.menu-toggle {
+  background: transparent;
+  font-size: 24px;
+  border: none;
+  cursor: pointer;
+}
+.main {
+  flex: 1;
+  background: transparent;
+  padding: 20px;
+  position: relative;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: transparent;
+  color: black;
+  padding: 1rem;
+}
+
+.header > * {
+  margin: 10px 0;
+  font-size: 20px;
+  cursor: pointer;
+  gap: 20px;
+}
+
+.image-upload i,
+.settings i,
+.prev i {
+  font-size: 24px;
+}
+
+h3 {
+display: flex;  
+  width: 50%;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .header {
+    justify-content: space-around;
+    max-width: 100%;
+  }
+
+  .header > * {
+    margin: 0 10px;
+  }
+
+  h3 {
+    font-size: 16px;
+  }
+    .form-section,
+  .row,
+  .toggle-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  input,
+  select,
+  button {
+    width: 100%;
+  }
+
+  .cancel-btn,
+  .green-btn {
+    width: 100%;
+  }
+
+}
+body {
+  font-family: sans-serif;
+  background: #f2f2f2;
+  padding: 20px;
+  margin: 0;
+}
+
+form {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.form-section {
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select {
+  padding: 10px;
+  font-size: 14px;
+  flex: 1 1 200px;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 10px 14px;
+  font-size: 14px;
+  background: #d9d9d9;
+  border: none;
+  cursor: pointer;
+}
+
+.green-btn {
+  background: #4CAF50;
+  color: #fff;
+}
+.blue-outline{
+    border: 2px solid #00bfff;
+    padding: 15px;
+    border-radius: 6px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.blue-bg {
+  background: #c2f0ff;
+  padding: 15px;
+  border-radius: 6px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+h3, h4 {
+  width: 100%;
+  margin: 10px 0 5px;
+}
+
+.badge {
+  background: #f88;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+.toggle-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+flex-wrap: wrap;}
+
+/* Switch toggle */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.switch-label {
+  font-size: 14px;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.3s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(20px);
+}
+.cancel-btn {
+  background: #ccc;
+  color: black;
+  padding: 10px 16px;
+  margin-right: 10px;
+}
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(8px); /* <-- BLUR EFFECT */
+  background-color: rgba(0, 0, 0, 0.3); /* semi-transparent dark background */
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  background: #e6fdff;
+  padding: 2rem 1.5rem;
+  width: 95%;
+  max-width: 800px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.modal-body label {
+  display: block;
+  margin: 0.8rem 0 0.4rem;
+  font-weight: bold;
+}
+
+.modal-body input,
+.modal-body textarea {
+  width: 100%;
+  padding: 0.6rem;
+  background: #e0e0e0;
+  border: none;
+  border-radius: 5px;
+  resize: none;
+}
+
+.tab-buttons button {
+  padding: 0.6rem 1.2rem;
+  margin-right: 0.5rem;
+  background: #e0e0e0;
+  border: none;
+  border-radius: 5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.tab-buttons .active-tab {
+  background: #00c7ff;
+  color: #ffff;
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.tab-panel {
+  margin-top: 1rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.unit-row, .conversion-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.unit-dual {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.unit-column {
+  flex: 1 1 45%;
+  background: #e4ffff;
+  padding: 1rem;
+  border-radius: 6px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.cancel-btn, .save-btn {
+  padding: 0.5rem 1.5rem;
+  border: none;
+  background: #ddd;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+@media (max-width: 600px) {
+  .unit-dual {
+    flex-direction: column;
+  }
+}
+select, label {
+    margin-bottom: 0.5rem;
+}
+select{
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+}
+.scan-btn {
+  background: #4b5c7b;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+.serial-input-area {
+  margin-top: 1rem;
+}
+
+.serial-input-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.3rem;
+}
+
+.serial-input-row input {
+  flex: 1;
+  padding: 0.5rem;
+  border: none;
+  background: #e0e0e0;
+  border-radius: 5px;
+}
+
+.serial-input-row button {
+  background: #f18181;
+  border: none;
+  padding: 0.5rem 1rem;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.serial-list {
+  margin-top: 1rem;
+  list-style: none;
+  padding: 0;
+}
+
+.serial-list li {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+}
+
+.serial-list li span {
+  cursor: pointer;
+  color: red;
+  font-weight: bold;
+}
+.save-btn {
+  margin-top: 1rem;
+  background: #dcdcdc;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  cursor: pointer;
+  border-radius: 5px;
+  display: block;
+  width: 100%;
+}
+
+
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar" id="sidebar">
+      <h3 class="company-title">Company Name Here</h3>
+      <ul class="nav">
+        <li><a href="../dashboard/dashboard.html">Dashboard</a></li>
+        <li><a href="../home/home.html">Home</a></li>
+        <li><a href="../party/parties.html">Parties</a></li>
+        <li><a href="../items/items.html">Items</a></li>
+        <li><a href="../sales/sales.html">Sales</a></li>
+        <li><a href="../purchase&expenses//purchase-dropdown.html">Purchase</a></li>
+        <li><a href="../cash-n-bank/cash-n-bank-dropdown.html">Cash & Bank</a></li>
+        <li><a href="../reports/reports.html">Reports</a></li>
+        <li><a href="../utilities/utilities.html">Utilities</a></li>
+        <li><a href="../extras/extras.html">Extras</a></li>
+        <li><a href="../settings/general.html">Settings</a></li>
+      </ul>
+      <div class="adv-sec">adv sec</div>
+    </div>
+    <div class="main">
+        <div class="header">
+          <button class="menu-toggle" id="menuToggle">:</button>
+          <div class="prev"><i class="fa-solid fa-left-long"></i></div>
+          <h3>Add Items</h3>
+          <label class="image-upload"></label>
+          <i class="fa-solid fa-images"></i>
+          <input type="file" name="img" accept="image/*" multiple style="display: none;">  
+        </label> 
+          <div class="settings"><i class="fa-solid fa-gear"></i></div>
+        </div>
+           
+     <div class="toggle-bar">
+  <label class="switch-label">Product</label>
+  <label class="switch">
+    <input type="checkbox" id="typeToggle" onchange="toggleType()" />
+    <span class="slider round"></span>
+  </label>
+  <label class="switch-label">Services</label>
+</div>
+
+<!-- Entry Form -->
+<form id="entryForm">
+  <!-- Basic Info -->
+  <div class="form-section">
+    <input type="text" name="itemName" placeholder="Item name" required />
+    <input type="text" name="itemCode" placeholder="Item code / barcode" />
+<button type="button" onclick="logClick('select unit'); toggleModal()">Select Unit</button>
+    <!-- Trigger Button -->
+<button id="openUnitModal">Add Units</button>
+
+<!-- Modal Structure -->
+<div id="unitModal" class="modal-overlay">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button class="close-btn" onclick="toggleModal()">×</button>
+      <div class="tab-buttons">
+        <button onclick="showTab('single')" id="singleTab" class="active-tab">Single Unit</button>
+        <button onclick="showTab('dual')" id="dualTab">Dual Unit</button>
+      </div>
+    </div>
+
+    <!-- Single Unit Tab -->
+    <div class="tab-panel" id="singlePanel">
+      <div class="unit-row">
+        <label>Base Unit</label>
+        <select><option>gram</option></select>
+        <label>Lower Unit</label>
+        <select><option>milligram</option></select>
+      </div>
+      <div class="conversion-row">
+        <label>Conversion Rate</label>
+        <div>1 gram = 1000 milligram</div>
+      </div>
+    </div>
+
+    <!-- Dual Unit Tab -->
+    <div class="tab-panel hidden" id="dualPanel">
+      <div class="unit-dual">
+        <div class="unit-column">
+          <label>Unit 1 - Base Unit</label>
+          <select><option>gram</option></select>
+          <label>Lower Unit</label>
+          <select><option>milligram</option></select>
+          <div class="conversion-row">1 gram = 1000 milligram</div>
+        </div>
+        <div class="unit-column">
+          <label>Unit 2 - Base Unit</label>
+          <select><option>gram</option></select>
+          <label>Lower Unit</label>
+          <select><option>milligram</option></select>
+          <div class="conversion-row">1 gram = 1000 milligram</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="cancel-btn" onclick="toggleModal()">Cancel</button>
+      <button class="save-btn">Save</button>
+    </div>
+  </div>
+</div>
+
+    <button type="button" onclick="logClick('assign code')">Assign Code</button>
+    <button type="button" onclick="logClick('scan code')">Scan Code</button>
+  </div>
+
+  <!-- Classification -->
+  <div class="form-section">
+    <input type="text" name="itemGroup" placeholder="Item group" />
+    <input type="text" name="itemCategory" placeholder="Item category" />
+    <input type="text" name="hsnSacCode" placeholder="HSN/SAC code" />
+    <input type="text" name="itemDesc" placeholder="Item description" />
+  </div>
+
+  <!-- Search + Manufacturing -->
+  <div class="form-section">
+    <input type="text" name="search" placeholder="Search here" />
+    <button type="button" class="green-btn" onclick="window.location.href='manufacturing.html'">Add Manufacturing Details</button>
+  </div>
+
+  <!-- Tax Section -->
+  <div class="form-section">
+    <h3>Taxes</h3>
+    <input type="number" name="taxRate" placeholder="Tax rate (%)" />
+  </div>
+
+  <!-- Pricing Section -->
+  <div class="form-section blue-bg">
+    <h3>Pricing</h3>
+
+    <!-- Toggle MRP vs Live -->
+    <div class="toggle-bar">
+      <label>MRP</label>
+      <label class="switch">
+        <input type="checkbox" id="priceToggle" />
+        <span class="slider round"></span>
+      </label>
+      <label>Live Rates</label>
+    </div>
+
+    <input type="number" name="mrp" placeholder="MRP" />
+    <input type="text" value="Live rate will be set automatically" disabled />
+
+    <!-- Discount fields -->
+    <div class="row">
+      <input type="number" name="discountLiveSale" placeholder="Dis on live rate for sale" />
+      <span class="badge">%</span>
+      <input type="number" name="discountMrpWholesale" placeholder="Dis on MRP for wholesale" />
+      <span class="badge">%</span>
+    </div>
+
+    <h4>Sale Price</h4>
+    <input type="number" name="salePrice" placeholder="Sale price" />
+    <span class="badge">without tax</span>
+    <input type="number" name="saleDiscount" placeholder="Dis on sale price" />
+    <span class="badge">%</span>
+
+    <h4>Wholesale Price</h4>
+    <input type="number" name="wholesalePrice" placeholder="Wholesale price" />
+    <span class="badge">without tax</span>
+    <input type="number" name="minSaleUnit" placeholder="Min sale unit" />
+
+    <h4>Purchase Price</h4>
+    <input type="number" name="purchasePrice" placeholder="Purchase price here" />
+    <span class="badge">without tax</span>
+  </div>
+</form>
+<!-- Additional Details Section -->
+<form id="additionalForm">
+  <!-- Unit System -->
+  <div class="form-section blue-bg">
+    <h3>Unit System</h3>
+    <div class="toggle-bar">
+      <label>Single Unit</label>
+      <label class="switch">
+        <input type="checkbox" id="unitToggle" />
+        <span class="slider round"></span>
+      </label>
+      <label>Dual Unit</label>
+    </div>
+  </div>
+
+  <!-- Weights -->
+  <div class="form-section">
+    <h4>For Unit 1 (Weight)</h4>
+    <input type="number" name="grossWeight" placeholder="Gross Weight" />
+    <input type="number" name="packingWeight" placeholder="Packing Weight" />
+    <input type="number" name="netWeight" placeholder="Net Weight" disabled />
+
+    <h4>For Unit 2 (Qty)</h4>
+    <input type="number" name="grossQty" placeholder="Gross Qty" />
+    <input type="number" name="freeQty" placeholder="Free Qty" />
+    <input type="number" name="netQty" placeholder="Net Qty" disabled />
+  </div>
+
+  <!-- Charges -->
+  <div class="form-section blue-bg">
+    <h3>Charges Per Item</h3>
+
+    <div class="row">
+      <input type="text" name="simpleChargeName" placeholder="Charge name" />
+      <input type="number" name="simpleChargeValue" placeholder="Charge value" />
+    </div>
+
+    <div class="row">
+      <input type="text" name="customChargeName" placeholder="Custom charge name" />
+      <input type="number" name="customChargeValue" placeholder="Charge value" />
+      <select name="customChargeOp">
+        <option value="%">%</option>
+        <option value="+">+</option>
+        <option value="-">-</option>
+      </select>
+      <span>on</span>
+      <select name="customChargeUnit">
+        <option>Unit 1</option>
+        <option>Unit 2</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Stock Section -->
+  <div class="form-section blue-bg">
+    <h3>Stock</h3>
+
+    <input type="number" name="openingStock1" placeholder="Opening stock unit 1" />
+    <input type="number" name="openingStock2" placeholder="Opening stock unit 2" />
+
+    <div class="row">
+<!-- Trigger Button -->
+<button type="button" onclick="openSerialModal()">Enter Serial No.</button>
+
+<!-- Modal Overlay -->
+<div id="serialModal" class="modal-overlay">
+  <div class="modal-box">
+    <div class="modal-header">
+      <span>⬅ Opening Stock - Serial No.</span>
+      <button class="scan-btn">Scan</button>
+      <button class="close-btn" onclick="closeSerialModal()">×</button>
+    </div>
+
+    <div class="modal-body">
+      <div class="serial-input-area">
+        <label>Enter Serial No. <span id="serialCount">0/500 entered</span></label>
+        <div class="serial-input-row">
+          <input type="text" id="serialInput" placeholder="Type serial..." />
+          <button onclick="addSerial()">Add</button>
+        </div>
+        <ul id="serialList" class="serial-list"></ul>
+      </div>
+
+      <button class="save-btn" onclick="saveSerials()">Save</button>
+    </div>
+  </div>
+</div>
+      <input type="text" name="batchNo" placeholder="Batch No." />
+      <input type="text" name="huidNo" placeholder="Huid No." />
+    </div>
+
+    <div class="row">
+      <input type="date" name="asOfDate" placeholder="As of date" />
+      <input type="number" name="itemPrice" placeholder="At price/unit" />
+      <input type="text" name="freeItem" placeholder="Free item" />
+      <input type="number" name="freeItemQty" placeholder="Free item qty" />
+    </div>
+
+    <div class="row">
+      <button type="button" onclick="logClick('add subset')">Add Subset</button>
+      <input type="text" name="diamondQuality" placeholder="Diamond quality" />
+      <input type="number" name="diamondRate" placeholder="Diamond rate" />
+      <input type="number" name="diamondValue" placeholder="Diamond value" />
+    </div>
+
+    <div class="row">
+      <input type="number" name="minStockUnit1" placeholder="Min stock unit 1" />
+      <input type="number" name="minStockUnit2" placeholder="Min stock unit 2" />
+    </div>
+  </div>
+
+  <!-- Location Section -->
+  <div class="form-section">
+    <h3>Location</h3>
+<!-- Godown Dropdown -->
+<label for="godownSelect"></label>
+<select id="godownSelect" onchange="checkGodownSelection()">
+  <option value="">-- Choose Godown --</option>
+  <option value="Godown A">Godown A</option>
+  <option value="Godown B">Godown B</option>
+  <option value="addNew">+ Add New Godown</option>
+</select>
+
+<!-- Add Godown Modal -->
+<div id="godownModal" class="modal-overlay">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3>Add Godown</h3>
+      <button class="close-btn" onclick="closeGodownModal()">×</button>
+    </div>
+
+    <div class="modal-body">
+      <label for="godownName">Godown Name</label>
+      <input type="text" id="godownName" placeholder="Enter name" />
+
+      <label for="godownAddress">Godown Address</label>
+      <textarea id="godownAddress" rows="3" placeholder="Enter address"></textarea>
+
+      <button class="save-btn" onclick="saveGodown()">Save</button>
+    </div>
+  </div>
+</div>
+    <input type="text" name="locationDesc" placeholder="Describe location" />
+  </div>
+
+  <!-- Online Store Section -->
+  <div class="form-section blue-outline">
+    <h3>Online Store</h3>
+    <input type="number" name="onlinePrice" placeholder="Online store item price" />
+    <input type="text" name="onlineDesc" placeholder="Online store description" />
+
+    <div class="toggle-bar">
+      <label>Same as offline</label>
+      <label class="switch">
+        <input type="checkbox" id="onlineToggle" />
+        <span class="slider round"></span>
+      </label>
+    </div>
+  </div>
+
+  <!-- Submit + Cancel Buttons -->
+  <div class="form-section row" style="justify-content: flex-end;">
+    <button type="button" onclick="logClick('cancel')" class="cancel-btn">Cancel</button>
+    <button type="submit" onclick="logClick('save')" class="green-btn">Save</button>
+  </div>
+</form>
+
+
+<form id="itemForm" style="display: none;">
+  <!-- Basic Info -->
+  <div class="form-section blue-bg">
+    <h3>Basic Information</h3>
+    <div class="row">
+      <input type="text" name="itemName" placeholder="Product/Service Name" />
+      <button type="button" onclick="logClick('select unit')">Select Unit</button>
+    </div>
+    <div class="row">
+      <input type="text" name="itemCode" placeholder="Barcode / Service Code" />
+      <button type="button" onclick="logClick('assign code')">Assign Code</button>
+      <button type="button" onclick="logClick('scan code')">Scan Code</button>
+    </div>
+  </div>
+
+  <!-- Classification -->
+  <div class="form-section">
+    <h3>Classification</h3>
+    <div class="row">
+      <input type="text" name="itemGroup" placeholder="Group" />
+      <input type="text" name="itemCategory" placeholder="Category" />
+    </div>
+    <div class="row">
+      <input type="text" name="hsnSacCode" placeholder="HSN/SAC Code" />
+      <input type="text" name="itemDesc" placeholder="Description" />
+    </div>
+    <div class="row">
+      <input type="text" name="search" placeholder="Search or Tag" />
+    </div>
+  </div>
+
+  <!-- Taxes -->
+  <div class="form-section">
+    <h3>Tax Settings</h3>
+    <div class="row">
+      <input type="number" name="taxRate" placeholder="Tax Rate (%)" />
+    </div>
+  </div>
+
+  <!-- Pricing Section -->
+  <div class="form-section blue-bg">
+    <h3>Pricing</h3>
+    <div class="toggle-bar">
+      <label>MRP</label>
+      <label class="switch">
+        <input type="checkbox" id="priceToggle" />
+        <span class="slider round"></span>
+      </label>
+      <label>Live Rates</label>
+    </div>
+
+    <div class="row">
+      <input type="number" name="mrp" placeholder="MRP" />
+    </div>
+
+    <div class="row">
+      <input type="number" name="disOnMrpSale" placeholder="Discount on MRP (Sale)" />
+      <span class="badge">%</span>
+
+      <input type="number" name="disOnMrpWholesale" placeholder="Discount on MRP (Wholesale)" />
+      <span class="badge">%</span>
+    </div>
+
+    <h4>Sale Price</h4>
+    <div class="row">
+      <input type="number" name="salePrice" placeholder="Sale Price" />
+      <span class="badge">without tax</span>
+      <input type="number" name="disOnSale" placeholder="Discount on Sale Price" />
+      <span class="badge">%</span>
+    </div>
+
+    <h4>Wholesale Price</h4>
+    <div class="row">
+      <input type="number" name="wholesalePrice" placeholder="Wholesale Price" />
+      <span class="badge">without tax</span>
+      <input type="number" name="minSaleUnit" placeholder="Min Sale Unit" />
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="form-section row" style="justify-content: flex-end;">
+    <button type="button" onclick="logClick('cancel')" class="cancel-btn">Cancel</button>
+    <button type="submit" onclick="logClick('save')" class="green-btn">Save</button>
+  </div>
+</form>
+
+
+        <div class="adv-sec">adv sec</div>
+    </div>
+
+</div>
+<script src="script.js"></script>
+<script>
+
+const toggleBtn = document.getElementById('menuToggle');
+const sidebar = document.getElementById('sidebar');
+
+toggleBtn.addEventListener('click', () => {
+  sidebar.classList.toggle('hidden');
+});
+
+const formData = new FormData(document.getElementById("additionalForm"));
+// On page load: show product by default
+window.onload = () => {
+  document.getElementById("entryForm").style.display = "block";
+  document.getElementById("itemForm").style.display = "none";
+};
+
+</script>
+</body>
+</html>

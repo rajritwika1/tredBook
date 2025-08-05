@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Other Income</title>
+    <script src="https://kit.fontawesome.com/1e18fc97cb.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .main {
+            padding: 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f0f0f0;
+            height: 60px;
+            padding: 0 20px;
+        }
+        .header button {
+            background-color: #f0f0f0;
+            border: none;
+            cursor: pointer;
+        }
+        .content {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            background-color: #f0f0f0;
+            height: 60px;
+            padding: 0 20px;
+            align-items: center;
+        }
+        .content-inner {
+            width: 50%;
+        }
+        .container {
+            display: flex;
+            margin-top: 20px;
+        }
+        .container-inner {
+            width: 50%;
+            padding: 10px;
+        }
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .amount {
+           
+            margin-top: 10px;
+        }
+        .add-button {
+           background-color: #3498db;
+            color: white;
+            padding: 10px 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .salesactions {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 15px;
+  flex-direction: row;
+}
+
+.salesactions button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background-color: #0077cc;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.salesactions button:hover {
+  background-color: #005fa3;
+}
+.bottom-fields textarea,
+.bottom-fields input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+}
+.bottom-fields{
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+/* Modal Base */
+.modal {
+  position: fixed;
+  inset:0;
+  padding:20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 9999;
+  overflow-y: auto;
+}
+
+/* Background Blur Overlay */
+.modal-overlay {
+  position: fixed;
+  inset:0;
+  backdrop-filter: blur(5px);
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: -1;
+}
+
+/* Hide Modal Initially */
+.hidden {
+  display: none;
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fff;
+  margin-top: 60px;
+  padding: 20px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 520px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  overflow: auto;
+  max-height: 90vh;
+  backdrop-filter: blur(3px);
+}
+
+/* Header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.modal-header h2 {
+  font-size: 20px;
+}
+
+.modal-header button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* Subheader Inputs */
+.modal-subheader {
+  display: flex;
+  padding: 10px;
+  font-size: 14px;
+}
+
+/* Body */
+.modal-body {
+  margin-top: 10px;
+}
+
+.items, .body-heading, .body-items {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+}
+
+.sub-items {
+  flex: 1;
+  padding: 4px;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* Bottom Fields */
+.bottom-fields {
+  margin-top: 15px;
+}
+
+.bottom-fields textarea {
+  width: 100%;
+  height: 60px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.bottom-fields input[type="file"] {
+  display: block;
+  margin-top: 10px;
+}
+
+/* Action Buttons */
+
+
+.salesactions button,
+.add-button {
+  padding: 10px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+
+
+/* Responsive */
+@media (max-width: 600px) {
+  .modal-content {
+    margin: 30px 10px;
+    padding: 15px;
+  }
+
+  .modal-header h2 {
+    font-size: 18px;
+  }
+
+  .sub-items {
+    font-size: 12px;
+  }
+
+  .salesactions {
+    flex-direction: column;
+  }
+
+  .salesactions button {
+    width: 100%;
+  }
+}
+
+  </style>
+</head>
+<body>
+    <div class="main">
+        <div class="header">
+           <button onclick="window.location.href='purchase-dropdown.html'">⬅</button>
+            <span><strong>other income</strong></span>
+            <input type="text" placeholder="Search...">
+        </div>
+        <div class="content">
+            <div class="content-inner">other income category</div>
+            <div class="content-inner">amount</div>
+        </div>
+        <div class="container">
+            <div class="container-inner">
+                <div class="amount">other income 01</div>
+                <div class="amount">other income 01</div>
+                <div class="amount">other income 01</div>
+                <div class="amount">other income 01</div>
+                <div class="amount">other income 01</div>
+            </div>
+            <div class="container-inner">
+                <div class="amount">$200</div>
+                <div class="amount">$200</div>
+                <div class="amount">$200</div>
+                <div class="amount">$200</div>
+                <div class="amount">$200</div>
+            </div>
+        </div>
+        <div class="footer">
+            <button class="add-button" id="openModalBtn">+ add other income</button>
+    </div>
+     <div id="modal" class="modal hidden">
+        <div class="modal-overlay" id="modalOverlay">
+            <div class="modal-content">
+            <div class="modal-header">
+                <button class="back-btn" id="closeModalBtn"><i class="fas fa-arrow-left"></i></button>
+                <h2>Add Other Income</h2>
+                <i class="fa fa-gear"></i>
+            </div>
+            <div class="modal-subheader">
+                <input type="date" placeholder="Date">
+                <input type="time" placeholder="Time">
+                <input type="text" placeholder="other income category">
+                <input type="text" placeholder="billing name (optional)">
+            </div>
+            <div class="modal-body">
+                <div class="items">
+                    <div class="sub-items">billed items</div>
+                    <div class="sub-items">delete items/done</div>
+             </div>
+             <div class="body-heading">
+                <div class="sub-items">item name</div>
+                <div class="sub-items">qty</div>
+                <div class="sub-items">rate</div>
+                <div class="sub-items">amount</div>
+             </div>
+             <div class="body-items">
+                <div class="sub-items">item 1</div>
+                <div class="sub-items">1</div>
+                <div class="sub-items">$150</div>
+                <div class="sub-items">$150</div>
+             </div>
+              <div class="body-items">
+                <div class="sub-items">item 1</div>
+                <div class="sub-items">1</div>
+                <div class="sub-items">$150</div>
+                <div class="sub-items">$150</div>
+             </div>
+              <div class="body-items">
+                <div class="sub-items">item 1</div>
+                <div class="sub-items">1</div>
+                <div class="sub-items">$150</div>
+                <div class="sub-items">$150</div>
+             </div>
+             <div class="body-heading">
+                <div class="sub-items">total</div>
+                <div class="sub-items">2</div>
+                <div class="sub-items">......</div>
+                <div class="sub-items">$300</div>
+             </div>
+             <div class="body-heading">
+                <div class="sub-items">round off</div>
+                <div class="sub-items">$50</div>
+             </div>
+             <div class="body-heading">
+                <div class="sub-items">discount</div>
+                <div class="sub-items">$50</div>
+             </div>
+             <div class="body-heading">
+                <div class="sub-items">cash: <i class="fas fa-trash-alt"></i></div>
+                <div class="sub-items">$50</div>
+             </div>
+             <div class="body-heading">
+                <div class="sub-items">ABC bank: <i class="fas fa-trash-alt"></i></div>
+                <input type="text" placeholder="ref no.">
+                <div class="sub-items">$50</div>
+             </div>
+             <div class="body-heading">
+                <button class="add-button">+ add payment type</button>
+                <span><strong>received $100/300</strong></span>
+            </div>
+            </div>
+            <div class="bottom-fields">
+      <textarea placeholder="description"></textarea>
+      <input type="file">
+    </div>
+
+    <div class="salesactions">
+      <button>save & new</button>
+      <button>save</button>
+      <button>save & share</button>
+    </div>
+        </div>
+        </div>
+
+     </div>
+   <script>
+  const modal = document.getElementById("modal");
+  const modalContent = document.querySelector(".modal-content");
+  const openModalBtn = document.getElementById("openModalBtn");
+  const closeModalBtn = document.getElementById("closeModalBtn");
+  const overlay = document.getElementById("modalOverlay");
+
+  openModalBtn.addEventListener("click", function () {
+    modal.classList.remove("hidden");
+    document.body.style.overflow = "hidden"; // prevent background scroll
+  });
+
+  closeModalBtn.addEventListener("click", function () {
+    modal.classList.add("hidden");
+    document.body.style.overflow = "auto";
+  });
+
+  overlay.addEventListener("click", function () {
+    modal.classList.add("hidden");
+    document.body.style.overflow = "auto";
+  });
+</script>
+</body>
+</html>

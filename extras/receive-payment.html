@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Receive Payment</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      background-color: #f8f8f8;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .header button {
+      padding: 10px 20px;
+      border: none;
+      color: white;
+      background-color: #2d89ef;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .section {
+      margin-bottom: 20px;
+    }
+
+    .section h3 {
+      margin-bottom: 10px;
+      font-size: 18px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 5px;
+    }
+     .sec{
+        display: flex;
+        align-items: center;
+        
+     }
+     .sec select{
+        max-width: fit-content;
+        font-size: 10px;
+     }
+    .field-row {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .field-row span {
+      margin: 5px 0;
+    }
+
+    .loan-items, .payment-section {
+      background-color: #f0f0f0;
+      padding: 15px;
+      border-radius: 8px;
+    }
+
+    .loan-items .item {
+      border-bottom: 1px solid #ccc;
+      padding: 10px 0;
+    }
+
+    .loan-items .item:last-child {
+      border: none;
+    }
+    
+    .loan-type {
+      background-color: #eaeaea;
+      padding: 15px;
+      border-radius: 8px;
+    }
+
+    label {
+      display: inline-block;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"], input[type="number"], select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 20px;
+      margin: 10px 0;
+    }
+
+    .emi-options, .compound-options {
+      background-color: #dff;
+      padding: 10px;
+      margin-top: 10px;
+    }
+
+    .payment-type {
+      margin-top: 10px;
+    }
+
+    .payment-type .payment-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 0;
+    }
+
+    .btn-row {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .btn-row button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .btn-save {
+      background-color: #4caf50;
+      color: white;
+    }
+
+    .btn-cancel {
+      background-color: #f44336;
+      color: white;
+    }
+    .dropbtn {
+  background-color: #3498db;
+  color: white;
+  padding: 10px 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}.item{
+    display: flex;
+   flex-direction: row;
+   gap: 10px;
+}
+
+    @media (max-width: 600px) {
+      .field-row {
+        flex-direction: column;
+      }
+
+      .header {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .btn-row {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="header">
+      <button>add payment</button>
+      <button style="background-color: #e74c3c;">view transaction</button>
+    </div>
+
+    <div class="section">
+      <div class="field-row">
+        <span><strong>party name:</strong> abcd kumar</span>
+        <span><strong>slip no:</strong> #Ln24</span>
+      </div>
+      <div class="field-row">
+        <span><strong>party phone no:</strong> 98574522124</span>
+        <span><strong>loan date:</strong> 15-02-24 &nbsp; 05:25 pm</span>
+      </div>
+      <div class="field-row">
+        <span><strong>loan amount:</strong> $50000</span>
+        <span><strong>interest amount:</strong> 1000</span>
+        <span><strong>loan duration:</strong> 6 months</span>
+      </div>
+    </div>
+  <div class="sec">
+    <span>more options</span><select>
+        <option></option>
+    </select>
+  </div>
+    <div class="section loan-items">
+        <span>loan items</span>
+      <div class="item">
+        <div class="sub-item"> <strong>#1</strong><br></div>
+        <div class="sub-item"> Items descriptions here... <br/>
+        item category name</div>
+       <div class="sub-item"> $25000 <br/> net wt: 10g</div>
+       
+      </div>
+      <div class="item">
+         <div class="sub-item"> <strong>#2</strong><br></div>
+        <div class="sub-item"> Items descriptions here... <br/>
+        item category name</div>
+       <div class="sub-item"> $25000 <br/> net wt: 10g</div>
+      </div>
+      <div class="field-row" style="margin-top: 10px;">
+        <strong>Total Estimated Value: $50000</strong>
+      </div>
+    </div>
+
+    <div class="section">
+      <label>Loan Processing Fee</label>
+      <input type="text" placeholder="Enter processing fee" />
+      <label>Loan Other Charges</label>
+      <input type="text" placeholder="Enter other charges" />
+    </div>
+
+    <div class="section loan-type">
+      <h3>Loan Type</h3>
+      <div class="radio-group">
+        <label><input type="radio" name="loanType" value="simple"/> Simple Interest</label>
+        <label><input type="radio" name="loanType" value="compound" /> Compound Interest</label>
+        <label><input type="radio" name="loanType" value="emi"/> EMI</label>
+      </div>
+
+      <div id="interestStartDateSection" style="display: none;">
+    <label>Interest Start Date</label>
+    <input type="text" placeholder="dd-mm-yyyy" />
+  </div>
+      <label>Interest Rate (%)</label>
+      <input type="number" placeholder="Enter interest rate" />
+
+      <div class="compound-options" id="compoundOptions" style="display: none;">
+    <strong>//Compound Interest Option</strong><br>
+    <label>Duration Type</label>
+    <select>
+      <option value="yearly">Yearly</option>
+      <option value="monthly">Monthly</option>
+    </select>
+    <label>Compound Interval in Month</label>
+    <input type="number" placeholder="e.g., 10" />
+  </div>
+
+     <div class="emi-options" id="emiOptions" style="display: none;">
+    <strong>//EMI Option</strong><br>
+    <label>Tenure (year/month)</label>
+    <input type="text" placeholder="Enter tenure" />
+    <button class="dropbtn" id="showEmiBtn">emi list here</button>
+  </div>
+</div>
+   <div id="emiPaymentSection" class="section payment-section" style="display: none;">
+  <h3>Emi 1</h3>
+  <span>Payments</span>
+  <div class="payment-row">
+    <span>Discount:</span> <input type="text" placeholder="Enter discount" />
+  </div>
+  <div class="payment-row">
+    <span>Cash:</span> <span>$70</span>
+  </div>
+  <div class="payment-row">
+    <span>Cheque:</span> <span>ref no. $70</span>
+  </div>
+  <div class="payment-row">
+    <span>ABC Bank:</span> <span>ref no. $70</span>
+  </div>
+  <div class="payment-row">
+    <strong>Received:</strong> 110
+    <strong>To Receive:</strong> 120
+    <strong>Balance:</strong> 20
+  </div>
+
+  <div class="payment-type">
+    <a href="#">+ Add Payment Type</a>
+  </div>
+
+  <div style="margin-top: 10px;">
+    <label>Notes</label><br>
+    <textarea style="width: 100%; padding: 10px;" rows="3" placeholder="Add any notes..."></textarea>
+  </div>
+</div>
+
+    <div class="btn-row">
+      <button class="btn-save">Save Payment</button>
+      <button class="btn-cancel">Cancel</button>
+    </div>
+
+  </div>
+  <script>
+    const loanTypeRadios = document.querySelectorAll('input[name="loanType"]');
+  const interestStartDateSection = document.getElementById('interestStartDateSection');
+  const compoundOptions = document.getElementById('compoundOptions');
+  const emiOptions = document.getElementById('emiOptions');
+  const emiPaymentSection = document.getElementById('emiPaymentSection');
+  const showEmiBtn = document.getElementById('showEmiBtn');
+
+  loanTypeRadios.forEach(radio => {
+    radio.addEventListener('change', function () {
+      const selected = this.value;
+
+      interestStartDateSection.style.display = selected === 'simple' ? 'block' : 'none';
+      compoundOptions.style.display = selected === 'compound' ? 'block' : 'none';
+      emiOptions.style.display = selected === 'emi' ? 'block' : 'none';
+
+      emiPaymentSection.style.display = 'none'; // hide emi section again when switching
+    });
+  });
+
+  showEmiBtn.addEventListener('click', function () {
+    emiPaymentSection.style.display = 'block';
+  });
+  </script>
+</body>
+</html>

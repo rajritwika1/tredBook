@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graph report</title>
+    <script src="https://kit.fontawesome.com/1e18fc97cb.js" crossorigin="anonymous"></script>
+
+<style>
+ *{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+body {
+      background: #f4f4f4;
+}
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+.sidebar {
+  width: 250px;
+  background: #333;
+  color: white;
+  padding: 15px;
+  transition: all 0.3s;
+}
+
+.sidebar .company-title {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.nav li {
+  list-style: none;
+  margin: 10px 0;
+}
+
+.nav li a {
+  color: white;
+  text-decoration: none;
+  background: black;
+  display: block;
+  padding: 10px;
+  border-radius: 8px;
+    text-align: center;
+}
+
+.adv-sec {
+  background: #999;
+  padding: 20px;
+  margin-top: 20px;
+    text-align: center;
+}
+.hidden {
+  display: none;
+}
+.menu-toggle {
+  background: transparent;
+  font-size: 24px;
+  border: none;
+  cursor: pointer;
+}
+.main {
+  flex: 1;
+  background: transparent;
+  padding: 20px;
+  position: relative;
+}
+
+.header {
+   display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+}
+ .header input {
+      padding: 10px;
+      flex: 1;
+      max-width: 300px;
+    }
+
+    .header button {
+      background:transparent;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+   .top-filters {
+      margin: 15px 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 14px;
+    }
+
+    .top-filters span {
+      padding: 6px 10px;
+      background: #c0ffff;
+      border-radius: 6px;
+    }
+
+    
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  background-color: #3498db;
+  color: white;
+  padding: 10px 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.dropdown-cont {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 4px;
+}
+
+.dropdown-cont a {
+  color: black;
+  padding: 10px 14px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-cont a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-cont {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #2980b9;
+}
+
+    @media (max-width: 768px) {
+      .sidebar {
+        display: none;
+      }
+
+      .main {
+        padding: 10px;
+      }
+
+      .header,
+      .summary-bar,
+      .sales-card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .header input {
+        width: 100%;
+      }
+    }
+ .drop-btn{
+ background-color: #3498db;
+  color: #333;
+  padding: 10px 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;  color: #333;
+
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar" id="sidebar">
+      <h3 class="company-title">Company Name Here</h3>
+      <ul class="nav">
+        <li><a href="../dashboard/dashboard.html">Dashboard</a></li>
+        <li><a href="../home/home.html">Home</a></li>
+        <li><a href="../party/parties.html">Parties</a></li>
+        <li><a href="../items/items.html">Items</a></li>
+        <li><a href="../sales/sales.html">Sales</a></li>
+        <li><a href="../purchase/purchase.html">Purchase</a></li>
+        <li><a href="../cashbank/cashbank.html">Cash & Bank</a></li>
+        <li><a href="../reports/reports.html">Reports</a></li>
+        <li><a href="../utilities/utilities.html">Utilities</a></li>
+        <li><a href="../extras/extras.html">Extras</a></li>
+        <li><a href="../settings/settings.html">Settings</a></li>
+      </ul>
+      <div class="adv-sec">adv sec</div>
+    </div>
+    <div class="main">
+        <div class="header">
+          <button class="menu-toggle" id="menuToggle">:</button>
+         <input type="text" placeholder="Search txns" />
+        <button>Add new sales</button>
+  
+          <div class="dropdown">
+            <button class="drop-btn" ><i class="fas fa-plus"></i></button>
+            <div class="dropdown-cont">
+              <a href="#">Sale invoice</a>
+              <a href="#">Quick sale</a>
+              <a href="#">Estimate/Quotation</a>
+              <a href="#">Payment in</a>
+              <a href="#">Sales return</a>
+              <a href="#">Sales order</a>
+              <a href="#">Sales order</a>
+              <a href="#">Sale fixed asset</a>
+              <a href="#">Delivery challan</a>
+            </div>
+          </div>
+          <button class="drop-btn"><i class="fas fa-bell"></i></button>
+         <div class="dropdown" >
+        <button class="drop-btn"><i class="fas fa-bars"></i></button>
+          <div class="dropdown-cont" style="left: auto;   right: 0;">
+            <a href="#">graph report</a>
+            <a href="#">excel report</a>
+            <a href="#">pdf download</a>
+            <a href="#">print list</a>
+          </div>
+         </div>
+        
+        </div>
+        
+         <div class="top-filters">
+        <div class="dropdown">
+            <button class="dropbtn">All Sales</button>
+            <div class="dropdown-cont">
+                <a href="#">This Month</a>
+                <a href="#">This Week</a>
+                <a href="#">Last Month</a>
+                <a href="#">This Quarter</a>
+                <a href="#">This Year</a>
+                <a href="#">Custom</a>
+            </div>
+        </div>
+        <span>between 01-12-24 to 31-12-24</span>
+        <div class="dropdown">
+            <button class="dropbtn">All Firms</button>
+            <div class="dropdown-cont">
+                <a href="#">Firm 1</a>
+                <a href="#">Firm 2</a>
+                <a href="#">Firm 3</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">All Users</button>
+            <div class="dropdown-cont">
+                <a href="#">User 1</a>
+                <a href="#">User 2</a>
+                <a href="#">User 3</a>
+            </div>
+        </div>
+      </div>
+     
+
+        <div class="adv-sec">adv sec</div>
+    </div>
+
+</div>
+<script>
+
+const toggleBtn = document.getElementById('menuToggle');
+const sidebar = document.getElementById('sidebar');
+
+toggleBtn.addEventListener('click', () => {
+  sidebar.classList.toggle('hidden');
+});
+
+</script>
+</body>
+</html>

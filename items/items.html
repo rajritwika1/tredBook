@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Items</title>
+    <script src="https://kit.fontawesome.com/1e18fc97cb.js" crossorigin="anonymous"></script>
+     <link rel="stylesheet" href="style.css">
+<style>
+ *{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+.sidebar {
+  width: 250px;
+  background: #333;
+  color: white;
+  padding: 15px;
+  transition: all 0.3s;
+}
+
+.sidebar .company-title {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.side li {
+  list-style: none;
+  margin: 10px 0;
+}
+
+.side li a {
+  color: white;
+  text-decoration: none;
+  background: black;
+  display: block;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.adv-sec {
+  background: #999;
+  padding: 20px;
+  margin-top: 20px;
+}
+.hidden {
+  display: none;
+}
+.menu-toggle {
+  background: transparent;
+  font-size: 24px;
+  border: none;
+  cursor: pointer;
+}
+.main {
+  flex: 1;
+  background: transparent;
+  padding: 20px;
+  position: relative;
+}
+
+.header {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.add-new-item{
+ background: transparent;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar" id="sidebar">
+      <h3 class="company-title">Company Name Here</h3>
+      <ul class="side">
+        <li><a href="../dashboard/dashboard.html">Dashboard</a></li>
+        <li><a href="../home/home.html">Home</a></li>
+        <li><a href="../party/parties.html">Parties</a></li>
+        <li><a href="../items/items.html">Items</a></li>
+        <li><a href="../sales/sales.html">Sales</a></li>
+        <li><a href="../purchase&expenses//purchase-dropdown.html">Purchase</a></li>
+        <li><a href="../cash-n-bank/cash-n-bank-dropdown.html">Cash & Bank</a></li>
+        <li><a href="../reports/reports.html">Reports</a></li>
+        <li><a href="../utilities/utilities.html">Utilities</a></li>
+        <li><a href="../extras/extras.html">Extras</a></li>
+        <li><a href="../settings/general.html">Settings</a></li>
+      </ul>
+      <div class="adv-sec">adv sec</div>
+    </div>
+    <div class="main">
+        <div class="header">
+          <button class="menu-toggle" id="menuToggle">:</button>
+          <button type="button" class="add-new-item" onclick="window.location.href='../items/add-new-item-products.html'">Add new item</button>
+          <div class="notification"><i class="fa fa-bell"></i></div>
+          <div class="menu-btn"><i class="fa-solid fa-bars"></i></div>
+        </div>
+          <div class="navbar">
+    <button onclick="logClick('products')">products</button>
+    <button onclick="logClick('services')">services</button>
+    <button onclick="logClick('categories')">categories</button>
+    <button onclick="logClick('units')">units</button>
+  </div>
+
+  <div class="quick-links">
+    <button onclick="logClick('rate update')">rate update</button>
+    <button onclick="logClick('stock summary')">stock summary</button>
+    <button onclick="window.location.href='../settings/items.html'">item settings</button>
+<div class="showall-wrapper">
+  <button onclick="logClick('show all')" class="showall-button">show all</button>
+  <div id="showAllDropdown" class="showall-dropdown">
+    <ul>
+      <li onclick="logClick('import items')">Import Items</li>
+      <li onclick="logClick('export items')">Export Items</li>
+      <li onclick="logClick('item wise pnl')">Item-wise PnL</li>
+      <li onclick="logClick('additional fields')">Additional Fields</li>
+      <li onclick="logClick('item details')">Item Details</li>
+      <li onclick="logClick('low stock summary')">Low Stock Summary</li>
+    </ul>
+  </div>
+</div>
+  </div>
+
+  <div class="search-bar">
+    <input type="text" placeholder="search items or codes" />
+    <button onclick="logClick('filter')">🔽</button>
+    <button onclick="logClick('barcode')">📷</button>
+    <div class="more-wrapper">
+    <button onclick="logClick('more')" class="more-button">⋮</button>
+    <div id="moreDropdown" class="more-dropdown">
+  <ul>
+    <li onclick="logClick('mark items active')">Mark items active</li>
+    <li onclick="logClick('mark items inactive')">Mark items inactive</li>
+    <li onclick="logClick('show inactive')">Show inactive</li>
+    <li onclick="logClick('units')">Units</li>
+    <li onclick="logClick('categories')">Categories</li>
+  </ul>
+</div>
+
+</div>
+
+  </div>
+
+  <div class="card">
+    <div class="item-title">item name here</div>
+    <div class="row">
+      <div>sale price<br>$250</div>
+      <div>purchase price<br>$250</div>
+      <div>in stock unit1<br>$250</div>
+      <div>in stock unit2<br>$250</div>
+    </div>
+    <div class="row">
+      <div>in stock unit3<br>$250</div>
+    </div>
+    <div class="share-icon" onclick="logClick('share 1')">↗</div>
+  </div>
+
+  <div class="card">
+    <div class="item-title">item name here</div>
+    <div class="row">
+      <div>sale price<br>$250</div>
+      <div>purchase price<br>$250</div>
+    </div>
+    <div class="row">
+      <div>in stock unit 1<br>$250</div>
+      <div>reserved unit 1<br>$250</div>
+      <div>available unit 1<br>$250</div>
+    </div>
+    <div class="row">
+      <div>in stock unit 2<br>$250</div>
+      <div>reserved unit 2<br>$250</div>
+      <div>available unit 2<br>$250</div>
+    </div>
+    <div class="row">
+      <div>in stock unit 3<br>$250</div>
+      <div>reserved unit 3<br>$250</div>
+      <div>available unit 3<br>$250</div>
+    </div>
+    <div class="share-icon" onclick="logClick('share 2')">↗</div>
+  </div>
+
+        <div class="adv-sec">adv sec</div>
+    </div>
+     <div id="filterPanel" class="filter-panel">
+  <div class="filter-header">
+    <h3>Filter By</h3>
+    <span onclick="toggleFilter()" class="close-btn">&times;</span>
+  </div>
+
+  <div class="filter-section">
+    <label><input type="checkbox" /> Products</label>
+    <label><input type="checkbox" /> Services</label>
+  </div>
+
+  <h4>Manufacturing</h4>
+  <div class="filter-section">
+    <label><input type="radio" name="raw" /> Show Raw Materials Only</label>
+    <label><input type="radio" name="raw" /> Don't Show Raw Materials</label>
+  </div>
+
+  <h4>Categories</h4>
+  <div class="filter-section">
+    <label><input type="checkbox" /> Gold</label>
+    <label><input type="checkbox" /> Silver</label>
+  </div>
+
+  <div class="filter-footer">
+    <button class="clear-btn" onclick="logClick('clear filters')">Clear</button>
+    <button class="apply-btn" onclick="logClick('apply filters')">Apply</button>
+  </div>
+</div>
+
+
+</div>
+<script src="script.js"></script>
+<script>
+
+const toggleBtn = document.getElementById('menuToggle');
+const sidebar = document.getElementById('sidebar');
+
+toggleBtn.addEventListener('click', () => {
+  sidebar.classList.toggle('hidden');
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Add User</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      padding: 20px;
+    }
+    .header{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+   
+    .butn {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+    .form-section, .table-container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border: 1px solid #ddd;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    table th, table td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+
+    .tick {
+      color: green;
+    }
+
+    .cross {
+      color: red;
+    }
+
+    .warn {
+      color: orange;
+    }
+
+    .btn {
+      padding: 10px 15px;
+      background: #ff4f5a;
+      color: white;
+      border: none;
+      float: right;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="form-section">
+    <div class="header">
+  <button class="butn"><span><strong>←</strong></span></i></button>
+  <span><strong>Add User</strong></span>
+    </div>
+    
+  <label>Enter Full Name</label>
+  <input type="text" id="fullName" placeholder="e.g. Suman" />
+
+  <label>Enter Phone Number or Email</label>
+  <input type="text" id="contact" placeholder="e.g. +91 9876543210 or email@example.com" />
+
+  <p style="font-size: 12px; color: gray;">
+    User will receive an invite link on this number or email
+  </p>
+
+  <label>Choose User Role</label>
+  <select id="roleSelect">
+    <option value="">-- Select Role --</option>
+    <option value="stock">Stock Keeper</option>
+    <option value="biller">Biller</option>
+    <option value="salesman">Biller and Salesman</option>
+  </select>
+</div>
+
+<div class="table-container" id="permissionsTableContainer" style="display:none;">
+  <h3 id="permissionTitle">Permissions</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Transaction</th>
+        <th>VIEW</th>
+        <th>CREATE</th>
+        <th>EDIT</th>
+        <th>SHARE</th>
+        <th>DELETE</th>
+      </tr>
+    </thead>
+    <tbody id="permissionBody">
+      <!-- dynamic rows -->
+    </tbody>
+  </table>
+  <button class="btn">Add User</button>
+</div>
+
+<script>
+  const roles = {
+    stock: {
+      title: "Stock Keeper Permissions",
+      permissions: {
+        "Purchase": ["✔", "✔", "⚠", "✖", "✖"],
+        "Payment-Out": ["✔", "✔", "⚠", "✖", "✖"],
+        "Purchase Order": ["✔", "✔", "⚠", "✖", "✖"],
+        "Debit Note": ["✔", "✔", "⚠", "✖", "✖"]
+      }
+    },
+    salesman: {
+      title: "Biller and Salesman Permissions",
+      permissions: {
+        "Sale": ["✔", "✔", "⚠", "✔", "✖"],
+        "Payment-In": ["✔", "✔", "⚠", "✔", "✖"],
+        "Sale Order": ["✔", "✔", "⚠", "✔", "✖"],
+        "Credit Note": ["✔", "✔", "⚠", "✔", "✖"],
+        "Delivery Challan": ["✔", "✔", "⚠", "✔", "✖"],
+        "Estimate": ["✔", "✔", "⚠", "✔", "✖"],
+        "Expense": ["⚠", "✔", "⚠", "✔", "✖"],
+        "Party": ["✔", "✔", "✔", "✔", "✖"],
+        "Item": ["✔", "✔", "✔", "✔", "✖"]
+      }
+    },
+    biller: {
+      title: "Biller Permissions",
+      permissions: {
+        "Sale": ["✔", "✔", "⚠", "✔", "✖"],
+        "Payment-In": ["✔", "✔", "⚠", "✔", "✖"],
+        "Sale Order": ["✔", "✔", "⚠", "✔", "✖"],
+        "Credit Note": ["✔", "✔", "⚠", "✔", "✖"],
+        "Delivery Challan": ["✔", "✔", "⚠", "✔", "✖"],
+        "Estimate": ["✔", "✔", "⚠", "✔", "✖"],
+        "Expense": ["⚠", "✔", "⚠", "✔", "✖"],
+        "Party": ["✔", "✔", "✔", "✔", "✖"],
+        "Item": ["✔", "✖", "✖", "✖", "✖"]
+      }
+    }
+  };
+
+  const roleSelect = document.getElementById("roleSelect");
+  const tableContainer = document.getElementById("permissionsTableContainer");
+  const permissionTitle = document.getElementById("permissionTitle");
+  const permissionBody = document.getElementById("permissionBody");
+
+  roleSelect.addEventListener("change", () => {
+    const selectedRole = roleSelect.value;
+    if (selectedRole && roles[selectedRole]) {
+      const data = roles[selectedRole];
+      permissionTitle.textContent = data.title;
+      tableContainer.style.display = "block";
+
+      permissionBody.innerHTML = "";
+      for (let txn in data.permissions) {
+        const perms = data.permissions[txn];
+        const row = `<tr>
+          <td>${txn}</td>
+          ${perms.map(p => {
+            if (p === "✔") return `<td class="tick">✔</td>`;
+            if (p === "✖") return `<td class="cross">✖</td>`;
+            return `<td class="warn">⚠</td>`;
+          }).join("")}
+        </tr>`;
+        permissionBody.innerHTML += row;
+      }
+    } else {
+      tableContainer.style.display = "none";
+    }
+  });
+</script>
+</body>
+</html>

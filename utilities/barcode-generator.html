@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Barcode Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 450px;
+      margin: 20px auto;
+      background: white;
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+
+    .header, .section, .preview-box, .footer {
+      padding: 10px;
+    }
+
+    .header {
+      background: #eee;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .dropdown-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px;
+      margin: 10px 0;
+    }
+
+    select, input {
+      width: 100%;
+      padding: 5px;
+    }
+
+    .toggle-section {
+      background: #b5f3eb;
+      padding: 10px;
+    }
+
+    .bulk-toggle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .grid-labels {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px;
+      margin-top: 10px;
+    }
+
+    .preview-box {
+      background: #ccc;
+      text-align: center;
+      margin: 10px 0;
+      padding: 10px;
+    }
+
+    .barcode-list {
+      width: 100%;
+      border-top: 1px solid #aaa;
+      margin-top: 10px;
+      padding-top: 10px;
+    }
+
+    .barcode-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px 0;
+    }
+
+    .btn {
+      background: #ddd;
+      border: none;
+      padding: 6px 12px;
+      margin: 5px;
+      cursor: pointer;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-evenly;
+    }
+
+    .trash-icon {
+      cursor: pointer;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <span>←</span>
+      <strong>barcode generator</strong>
+    </div>
+
+    <div class="dropdown-header">
+      <select>
+        <option>printer: regular</option>
+      </select>
+      <select>
+        <option>size: 65 labels (38*21mm)</option>
+      </select>
+      <select>
+        <option>label type: one side</option>
+      </select>
+    </div>
+
+    <div class="toggle-section">
+      <div class="bulk-toggle">
+        <span>Bulk tags</span>
+        <input type="checkbox" />
+      </div>
+
+      <label>Select barcodes to print</label>
+      <div class="grid-labels">
+        <input type="date" placeholder="From date">
+        <input type="date" placeholder="To date">
+      </div>
+
+      <label>select item name</label>
+      <input type="text" placeholder="Item name" />
+
+      <label>no of label</label>
+      <div class="grid-labels">
+        <select>
+          <option>header</option>
+          <option>unit</option>
+          <option>size</option>
+          <option>sale price</option>
+          <option>company name</option>
+          <option>batch no</option>
+          <option>category</option>
+          <option>item code</option>
+          <option>barcode</option>
+          <option>expiry date</option>
+          <option>manufacturing date</option>
+        </select>
+        <input type="text" placeholder="line 1" />
+        <input type="text" placeholder="line 2" />
+        <input type="text" placeholder="line 3" />
+        <input type="text" placeholder="line 4" />
+        <input type="text" placeholder="line 5" />
+      </div>
+    </div>
+
+    <div class="preview-box">
+      <div>xyz company</div>
+      <div>abc item</div>
+      <div>unit</div>
+      <div>item category</div>
+      <div>size</div>
+      <div>batch no</div>
+      <div>item code</div>
+      <div>barcode</div>
+    </div>
+
+    <button class="btn">add barcodes</button>
+
+    <div class="barcode-list">
+      <div><strong>list of added barcodes</strong></div>
+      <div class="barcode-row">
+        <span>header</span>
+        <span>line 1</span>
+      </div>
+      <div class="barcode-row">
+        <span>line 2</span>
+        <span>line 3</span>
+      </div>
+      <div class="barcode-row">
+        <span>line 4</span>
+        <span>line 5 <span class="trash-icon">🗑️</span></span>
+      </div>
+    </div>
+
+    <div class="footer">
+      <button class="btn">preview</button>
+      <button class="btn">generate barcode</button>
+    </div>
+  </div>
+</body>
+</html>

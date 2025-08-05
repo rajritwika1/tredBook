@@ -1,0 +1,107 @@
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(8px); /* <-- BLUR EFFECT */
+  background-color: rgba(0, 0, 0, 0.3); /* semi-transparent dark background */
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  background: #e6fdff;
+  padding: 2rem 1.5rem;
+  width: 95%;
+  max-width: 800px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tab-buttons button {
+  padding: 0.6rem 1.2rem;
+  margin-right: 0.5rem;
+  background: #e0e0e0;
+  border: none;
+  border-radius: 5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.tab-buttons .active-tab {
+  background: #00c7ff;
+  color: #ffff;
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.tab-panel {
+  margin-top: 1rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.unit-row, .conversion-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.unit-dual {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.unit-column {
+  flex: 1 1 45%;
+  background: #e4ffff;
+  padding: 1rem;
+  border-radius: 6px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.cancel-btn, .save-btn {
+  padding: 0.5rem 1.5rem;
+  border: none;
+  background: #ddd;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+@media (max-width: 600px) {
+  .unit-dual {
+    flex-direction: column;
+  }
+}
+select, label {
+    margin-bottom: 0.5rem;
+}
+select{
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+}

@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Items</title>
+    <script src="https://kit.fontawesome.com/1e18fc97cb.js" crossorigin="anonymous"></script>
+
+<style>
+ *{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+.cont {
+  display: flex;
+  min-height: 100vh;
+}
+.company-title{
+    color: #fff;
+}
+.sidebar {
+  width: 250px;
+  background: #333;
+  color: white;
+  padding: 15px;
+  transition: all 0.3s;
+}
+
+.sidebar .company-title {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.nav li {
+  list-style: none;
+  margin: 10px 0;
+}
+
+.nav li a {
+  color: white;
+  text-decoration: none;
+  background: black;
+  display: block;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.adv-sec {
+  background: #999;
+  padding: 20px;
+  margin-top: 20px;
+}
+.hidden {
+  display: none;
+}
+.menu-toggle {
+  background: transparent;
+  font-size: 24px;
+  border: none;
+  cursor: pointer;
+}
+.main {
+  flex: 1;
+  background: transparent;
+  padding: 20px;
+  position: relative;
+}
+
+.header {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+body {
+  font-family: Arial, sans-serif;
+  background: #fff;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  max-width: 100%;
+  margin: auto;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+h3 {
+  margin: 20px 0 10px;
+  color: #333;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+  font-size: 16px;
+  text-transform: lowercase;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 0;
+  flex-wrap: wrap;
+}
+
+.row label {
+  font-size: 14px;
+  color: #333;
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stepper button {
+  width: 24px;
+  height: 24px;
+  background: #ddd;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.subtext {
+  font-size: 12px;
+  color: #888;
+}
+
+.add-firm {
+  background: #e0e0e0;
+  border: none;
+  border-radius: 4px;
+  padding: 2px 6px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+/* Toggle Switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 38px;
+  height: 20px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #ccc;
+  transition: 0.3s;
+  border-radius: 20px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(18px);
+}
+
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background: #fff;
+}
+
+.btn {
+  padding: 8px 16px;
+  background: #ddd;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Modal styles */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.modal-content {
+  background: white;
+  max-width: 95%;
+  width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 20px;
+  border-radius: 8px;
+  position: relative;
+}
+
+/* Hide scrollbar */
+.modal-content::-webkit-scrollbar {
+  display: none;
+}
+.modal-content {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.toggle-labels {
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  margin-left: 10px;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.unit-section {
+  margin-top: 20px;
+}
+
+.unit-columns {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.unit-box {
+  flex: 1;
+  min-width: 300px;
+  padding: 10px;
+  background: #f0f0f0;
+  border-radius: 6px;
+}
+
+
+/* Logic block */
+.logic-block {
+  margin-top: 20px;
+  padding: 10px;
+  background: #eef2f5;
+  border-radius: 5px;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.dropbtn {
+  background-color: #3498db;
+  color: white;
+  padding: 10px 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+</style>
+</head>
+<body>
+    <div class="cont">
+        <div class="sidebar" id="sidebar">
+      <h3 class="company-title">Settings</h3>
+      <ul class="nav">
+        <li><a href="general.html">general</a></li>
+        <li><a href="transaction.html">transaction</a></li>
+        <li><a href="invoice-prints.html">invoice prints</a></li>
+        <li><a href="taxes-n-gst.html">taxes & gst</a></li>
+        <li><a href="#">user management</a></li>
+        <li><a href="transaction-sms.html">transaction sms</a></li>
+        <li><a href="#">reminders</a></li>
+        <li><a href="party.html">party</a></li>
+        <li><a href="items.html">items</a></li>
+        <li><a href="#">price calculations</a></li>
+        <li><a href="#">business category special</a></li>
+      </ul>
+    </div>
+    <div class="main">
+        <div class="header">
+          <button class="menu-toggle" id="menuToggle">:</button>
+          <span><strong>items</strong></span>
+          <input type="text" placeholder="search settings">
+          </div>
+            <div class="container">
+
+    <section>
+      <div class="row"><label>enable item</label><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+       <div class="row"><label>item type</label><select>
+            <option>purchase</option>
+            <option>services</option>
+            <option>purchase & services</option>
+            </select></div>     
+     <div class="row"><label>stock maintenaince</label><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+      <div class="row"><label>show low stock dialog</label><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+      <div class="row"><label>item units</label><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+       <div class="row"><label>default item units</label><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+       <div class="row"><button class="dropbtn" id="openUnitModal">set default units</button></div>
+        <div id="unitModal" class="modal">
+    <div class="modal-content">
+
+      <!-- Modal Header with toggle -->
+      <div class="modal-header">
+        <h3>set item units</h3>
+        <label class="switch">
+          <input type="checkbox" id="unitToggle" checked />
+          <span class="slider"></span>
+        </label>
+        <div class="toggle-labels">
+          <span>single unit</span>
+          <span>double unit</span>
+        </div>
+        <button id="closeUnitModal" class="close-btn">✕</button>
+      </div>
+
+      <!-- Content: leave space for single unit -->
+      <div id="singleUnitSection" class="unit-section" style="display: none;">
+        
+        <div class="unit-columns">
+          <!-- Unit 1 -->
+          <div class="unit-box">
+            <h4>unit 1</h4>
+            <label>set default unit <input type="checkbox" /></label><br>
+            <label>primary unit <input type="text" /></label><br>
+            <label>secondary unit <input type="text" /></label><br>
+            <label>select conversion rate</label><br>
+            <span><input type="radio" name="rate1" checked> 1 Box = <input type="number" value="10"> piece</span>
+          </div>
+        </div>
+
+        <!-- Customise logic block (simplified) -->
+        <div class="logic-block">
+          <h4>customise unit 1</h4>
+          <div class="row">
+            <input type="radio" name="custom1" />
+            Net qty <input type="text" value="Packing wt">
+            <input type="checkbox" />
+          </div>
+          <div class="row">
+            <input type="radio" name="custom1" />
+            field 1 <input type="text" value="Packing wt">
+            operation <select><option>-</option><option>+</option></select>
+            field 2 <input type="text" value="Packing wt">
+            = net qty <input type="text" value="Packing wt">
+            <input type="checkbox" />
+          </div>
+        </div>
+        <div class="row">
+            <button class="dropbtn">cancel</button>
+        <button class="dropbtn">save</button></div>
+      </div>
+    
+
+      <!-- Double unit section -->
+      <div id="doubleUnitSection" class="unit-section">
+        <div class="unit-columns">
+          <!-- Unit 1 -->
+          <div class="unit-box">
+            <h4>unit 1</h4>
+            <label>set default unit <input type="checkbox" /></label><br>
+            <label>primary unit <input type="text" /></label><br>
+            <label>secondary unit <input type="text" /></label><br>
+            <label>select conversion rate</label><br>
+            <span><input type="radio" name="rate1" checked> 1 Box = <input type="number" value="10"> piece</span>
+          </div>
+
+          <!-- Unit 2 -->
+          <div class="unit-box">
+            <h4>unit 2</h4>
+            <label>set default unit <input type="checkbox" /></label><br>
+            <label>primary unit <input type="text" /></label><br>
+            <label>secondary unit <input type="text" /></label><br>
+            <label>select conversion rate</label><br>
+            <span><input type="radio" name="rate2" checked> 1 Box = <input type="number" value="10"> piece</span>
+          </div>
+        </div>
+
+        <!-- Customise logic block (simplified) -->
+        <div class="logic-block">
+          <h4>customise unit 1</h4>
+          <div class="row">
+            <input type="radio" name="custom1" />
+            Net qty <input type="text" value="Packing wt">
+            <input type="checkbox" />
+          </div>
+          <div class="row">
+            <input type="radio" name="custom1" />
+            field 1 <input type="text" value="Packing wt">
+            operation <select><option>-</option><option>+</option></select>
+            field 2 <input type="text" value="Packing wt">
+            = net qty <input type="text" value="Packing wt">
+            <input type="checkbox" />
+          </div>
+        </div>
+
+        <div class="logic-block">
+          <h4>customise unit 2</h4>
+          <div class="row">
+            <input type="radio" name="custom2" />
+            Net qty <input type="text" value="Packing wt">
+            <input type="checkbox" />
+          </div>
+          <div class="row">
+            <input type="radio" name="custom2" />
+            field 1 <input type="text" value="Packing wt">
+            operation <select><option>-</option><option>+</option></select>
+            field 2 <input type="text" value="Packing wt">
+            = net qty <input type="text" value="Packing wt">
+            <input type="checkbox" />
+          </div>
+        </div>
+         <div class="row">
+            <button class="dropbtn">cancel</button>
+        <button class="dropbtn">save</button></div>
+     
+      </div>
+
+
+    </div>
+  </div>
+       <div class="row"><label>enable item subset</label><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+        <div class="row"><button class="dropbtn" id="modalItemSubsetBtn">set item subset</button></div>
+        <div id="modalItemSubset" class="modal">
+  <div class="modal-content">
+    <button id="closeModalBtn2" class="back-btn">←</button>
+    <h3>Item Subset</h3>
+
+    <div class="block">
+      <label><strong>Subset Item 1</strong></label>
+      <input type="text" placeholder="diamond">
+    </div>
+
+    <div class="flex">
+      <div><label>Diamond Qty <input type="number" value="5"></label></div>
+      <div><label>Diamond Rate <input type="number" value="5"></label></div>
+      <div><label>Diamond Value <input type="number" value="5"></label></div>
+    </div>
+
+    <div class="block">
+      <label><strong>Subset Item 2</strong></label>
+      <input type="text" placeholder="diamond">
+    </div>
+
+    <div class="flex">
+      <div><label>Diamond Qty <input type="number" value="5"></label></div>
+      <div><label>Diamond Rate <input type="number" value="5"></label></div>
+      <div><label>Diamond Value <input type="number" value="5"></label></div>
+    </div>
+
+    <button class="btn">Add More Subset</button>
+    <button class="btn">Save</button>
+  </div>
+</div>
+      <div class="row"><label>enable item wise charges</label><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+       <div class="row"><button class="dropbtn" id="modalAdditionalChargesBtn">set charges</button></div>
+       <div id="modalAdditionalCharges" class="modal">
+  <div class="modal-content">
+ <button id="closeModalBtn1" class="back-btn">←</button>
+    <h3>Additional Charges on Each Item</h3>
+
+    <div class="block">
+      <span class="section-title">Simple Charge</span>
+      <div class="flex">
+        <input type="text" placeholder="Charge Name">
+        <input type="text" placeholder="Charge Value">
+        <select><option>%</option><option>₹</option></select>
+        <span>on</span>
+        <input type="text" placeholder="Unit 1">
+        <button>🗑️</button>
+      </div>
+
+      <div class="flex">
+        <input type="text" placeholder="Charge Name">
+        <input type="text" placeholder="Charge Value">
+        <select><option>%</option><option>₹</option></select>
+        <span>on</span>
+        <input type="text" placeholder="Unit 1">
+        <button>🗑️</button>
+      </div>
+    </div>
+
+    <div class="block">
+      <span class="section-title">Simple Charge</span>
+      <div class="flex">
+        <input type="text" placeholder="Charge Name Here">
+        <input type="text" placeholder="Charge Value Here">
+        <button>🗑️</button>
+      </div>
+
+      <div class="flex">
+        <input type="text" placeholder="Charge Name Here">
+        <input type="text" placeholder="Charge Value Here">
+        <button>🗑️</button>
+      </div>
+    </div>
+
+    <button class="btn">Save</button>
+    <button class="btn">Edit</button>
+    <button class="btn">Cancel</button>
+  </div>
+</div>
+       <div class="row"><label>item category</label><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+       <div class="row"><label>party wise item rate</label><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+       <div class="row"><label>wholesale price</label><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+         <div class="row"><label>quantity upto decimal</label><div class="stepper">
+          <button>-</button>
+          <span>5</span>
+          <button>+</button>
+        </div></div>      
+         <div class="row"><label>item wise tax</label><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+       <div class="row"><label>item wise discount</label><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+       <div class="row"><label>update sale price from txn</label><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+      <div class="row"><label>additional item fields</label><button id="additionalFieldBtn"><i class="fa-solid fa-right-from-bracket"></i></button>
+            </div> 
+            <div class="modal" id="additionalField">
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <button id="closeModalBtn3" class="back-btn">←</button>
+                    <h3>additional fleids</h3>
+                    </div>
+                    <section>
+                     <div class="row"><label>serial no. tracking</label><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                     <div class="row"><label><input type="checkbox">serial no./IMEI no., etc</label> <input type="text" placeholder="serial no."></div>
+                    <div class="row"><label>Batch no. tracking</label><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                    <div class="row"><label><input type="checkbox">mrp/price</label> <input type="text" placeholder="mrp"></div>
+                     <div class="row"><label><input type="checkbox">batch no.</label> <input type="text" placeholder="serial no."></div>
+                     <div class="row"><label><input type="checkbox">model no.</label> <input type="text" placeholder="model no."></div>
+                     <div class="row"><label><input type="checkbox">exp date</label><input type="date"> <input type="text" placeholder="exp date"></div>
+                     <div class="row"><label><input type="checkbox">mfg date</label><input type="date"> <input type="text" placeholder="mfg date"></div>
+                     <div class="row"><label><input type="checkbox">size</label> <input type="text" placeholder="size."></div>
+                     <div class="row"><label>HUID tracking</label><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                     <div class="row"><label><input type="checkbox">HUID no.</label> <input type="text" placeholder="HUID no."></div>
+                     <div class="row"><label><input type="checkbox">rate</label> <input type="text" placeholder="rate"></div>
+                     <div class="row"><label><input type="checkbox">size</label> <input type="text" placeholder="size"></div>
+                        <div class="row"><label><input type="checkbox">date</label><input type="date"> <input type="text" placeholder="HM date"></div>
+                     <div class="row"><label><input type="checkbox">additional field 1</label> <input type="text" placeholder="model no."></div>
+                     <div class="row"><label>Sub set Item</label><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                     <div class="row"><label>Image</label><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+
+                </section>
+                <div class="row">
+                    <button class="dropbtn">save</button>
+                    <button class="dropbtn">cancel</button>
+                </div>
+                </div>
+            </div>
+             <div class="row"><label>item custom fields</label><button id="customFieldBtn"><i class="fa-solid fa-right-from-bracket"></i></button>
+            </div> 
+          
+            </div>
+         <div class="row"><label>description</label><i class="fa fa-pencil"></i><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+       <div class="row"><label>barcode scan</label><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+     <div class="row"><label>select barcode scan type</label></div>
+     <div class="row">
+        <label><input type="radio">USB scanner</label>
+        <label><input type="radio">Phone camera</label>
+     </div>
+    </section>
+    <section>
+        <h3>GST</h3>
+         <div class="row"><label>HSN/SAC code</label><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+         <div class="row"><label>additional cess</label><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+
+    </section>
+  </div>
+ </div>
+
+</div>
+<script>
+
+const toggleBtn = document.getElementById('menuToggle');
+const sidebar = document.getElementById('sidebar');
+
+toggleBtn.addEventListener('click', () => {
+  sidebar.classList.toggle('hidden');
+});
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById('unitModal');
+  const openBtn = document.getElementById('openUnitModal');
+  const closeBtn = document.getElementById('closeUnitModal');
+  const unitToggle = document.getElementById('unitToggle');
+  const singleUnit = document.getElementById('singleUnitSection');
+  const doubleUnit = document.getElementById('doubleUnitSection');
+
+  openBtn.addEventListener('click', () => {
+    modal.style.display = 'flex';
+  });
+
+  closeBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
+
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
+
+  unitToggle.addEventListener('change', () => {
+    if (unitToggle.checked) {
+      singleUnit.style.display = 'none';
+      doubleUnit.style.display = 'block';
+    } else {
+      singleUnit.style.display = 'block';
+      doubleUnit.style.display = 'none';
+    }
+  });
+});
+document.addEventListener('DOMContentLoaded', () => {
+  const openModal = document.getElementById('modalAdditionalChargesBtn');
+  const closeModal = document.getElementById('closeModalBtn1');
+  const modal = document.getElementById('modalAdditionalCharges');
+
+  openModal.addEventListener('click', () => {
+    modal.style.display = 'flex';
+  });
+
+  closeModal.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
+
+  // Optional: close modal on outside click
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
+});
+document.addEventListener('DOMContentLoaded', () => {
+  const openModal = document.getElementById('modalItemSubsetBtn');
+  const closeModal = document.getElementById('closeModalBtn2');
+  const modal = document.getElementById('modalItemSubset');
+
+  openModal.addEventListener('click', () => {
+    modal.style.display = 'flex';
+  });
+
+  closeModal.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
+
+  // Optional: close modal on outside click
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
+});
+document.addEventListener('DOMContentLoaded', () => {
+  const openModal = document.getElementById('additionalFieldBtn');
+  const closeModal = document.getElementById('closeModalBtn3');
+  const modal = document.getElementById('additionalField');
+
+  openModal.addEventListener('click', () => {
+    modal.style.display = 'flex';
+  });
+
+  closeModal.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
+
+  // Optional: close modal on outside click
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Party</title>
+    <script src="https://kit.fontawesome.com/1e18fc97cb.js" crossorigin="anonymous"></script>
+
+<style>
+ *{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+.cont {
+  display: flex;
+  min-height: 100vh;
+}
+.company-title{
+    color: #fff;
+}
+.sidebar {
+  width: 250px;
+  background: #333;
+  color: white;
+  padding: 15px;
+  transition: all 0.3s;
+}
+
+.sidebar .company-title {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.nav li {
+  list-style: none;
+  margin: 10px 0;
+}
+
+.nav li a {
+  color: white;
+  text-decoration: none;
+  background: black;
+  display: block;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.adv-sec {
+  background: #999;
+  padding: 20px;
+  margin-top: 20px;
+}
+.hidden {
+  display: none;
+}
+.menu-toggle {
+  background: transparent;
+  font-size: 24px;
+  border: none;
+  cursor: pointer;
+}
+.main {
+  flex: 1;
+  background: transparent;
+  padding: 20px;
+  position: relative;
+}
+
+.header {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+body {
+  font-family: Arial, sans-serif;
+  background: #fff;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  max-width: 100%;
+  margin: auto;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+h3 {
+  margin: 20px 0 10px;
+  color: #333;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+  font-size: 16px;
+  text-transform: lowercase;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 0;
+  flex-wrap: wrap;
+}
+
+.row label {
+  font-size: 14px;
+  color: #333;
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stepper button {
+  width: 24px;
+  height: 24px;
+  background: #ddd;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.subtext {
+  font-size: 12px;
+  color: #888;
+}
+
+.add-firm {
+  background: #e0e0e0;
+  border: none;
+  border-radius: 4px;
+  padding: 2px 6px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+/* Toggle Switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 38px;
+  height: 20px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #ccc;
+  transition: 0.3s;
+  border-radius: 20px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(18px);
+}
+
+
+</style>
+</head>
+<body>
+    <div class="cont">
+        <div class="sidebar" id="sidebar">
+      <h3 class="company-title">Settings</h3>
+      <ul class="nav">
+         <li><a href="general.html">general</a></li>
+        <li><a href="transaction.html">transaction</a></li>
+        <li><a href="invoice-prints.html">invoice prints</a></li>
+        <li><a href="taxes-n-gst.html">taxes & gst</a></li>
+        <li><a href="#">user management</a></li>
+        <li><a href="transaction-sms.html">transaction sms</a></li>
+        <li><a href="#">reminders</a></li>
+        <li><a href="party.html">party</a></li>
+        <li><a href="items.html">items</a></li>
+        <li><a href="#">price calculations</a></li>
+        <li><a href="#">business category special</a></li>
+      </ul>
+    </div>
+    <div class="main">
+        <div class="header">
+          <button class="menu-toggle" id="menuToggle">:</button>
+          <span><strong>Party</strong></span>
+          <input type="text" placeholder="search settings">
+          </div>
+            <div class="container">
+
+    <section>
+      <div class="row"><label>GST no.</label><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+      <div class="row"><label>party grouping</label><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+      <div class="row"><label>party additional fields</label><select>
+            <option>
+             </option>
+            </select></div>
+      <div class="row"><label>party shipping address</label><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+      <div class="row"><label>print shipping address</label><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+      <div class="row"><label>invite party to add themselves</label><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+      </section>
+  </div>
+ </div>
+
+</div>
+<script>
+
+const toggleBtn = document.getElementById('menuToggle');
+const sidebar = document.getElementById('sidebar');
+
+toggleBtn.addEventListener('click', () => {
+  sidebar.classList.toggle('hidden');
+});
+
+</script>
+</body>
+</html>

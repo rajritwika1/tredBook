@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User-Account Page</title>
+    <script src="https://kit.fontawesome.com/1e18fc97cb.js" crossorigin="anonymous"></script>
+      <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 20px;
+      background-color: #f8f8f8;
+    }
+
+    /* Profile Section */
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .profile .image {
+      width: 80px;
+      height: 80px;
+      background: #ccc;
+      flex-shrink: 0;
+    }
+    .profile .image img {
+      width: 100%;
+      height: 100%;
+      background: #ccc;
+    }
+    .profile .username {
+      background: #ddd;
+      padding: 5px;
+      border-radius: 5px;
+      
+    }
+
+    /* Action Buttons */
+    .actions {
+      margin: 10px 0;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .actions button {
+      padding: 10px 15px;
+      background: #eee;
+      border: none;
+      cursor: pointer;
+      flex: 1;
+      min-width: 120px;
+    }
+    .create{
+        color: black;
+        font-weight: bold;
+    }
+
+    /* Company List Section */
+    .company-section {
+      background: #f8b8b8;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .company-section h3 {
+      margin: 0 0 10px;
+    }
+
+    .search-box {
+      text-align: right;
+      margin-top: -40px;
+    }
+
+    .search-box input {
+      padding: 10px;
+      width: 200px;
+    }
+
+    .tabs {
+      display: flex;
+      background: lightseagreen;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-top: 20px;
+    }
+
+    .tab {
+      flex: 1;
+      padding: 10px;
+      text-align: center;
+      color: white;
+      font-weight: bold;
+    }
+
+    .tab.my-company {
+      background: lightblue;
+      border-right: 4px solid black;
+    }
+
+    .tab.shared {
+      background: lightgreen;
+    }
+
+    .company-card {
+      margin-top: 10px;
+      background: #cce;
+      padding: 15px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .company-card .title {
+      font-weight: bold;
+    }
+
+    .company-card .open-btn {
+      background: darkred;
+      color: white;
+      padding: 5px 10px;
+      margin-right: 10px;
+    }
+
+    .company-card .options {
+      position: relative;
+    }
+
+    .dropdown {
+      background: #eee;
+      padding: 5px 10px;
+      position: absolute;
+      top: 30px;
+      right: 0;
+      display: none;
+      box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    }
+
+    .dropdown div {
+      margin: 5px 0;
+      cursor: pointer;
+    }
+     .dropdown1 {
+      background: #eee;
+      padding: 5px 10px;
+      position: absolute;
+      top: 30px;
+      right: 0;
+      display: none;
+      box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    }
+    
+    .dropdown1 div {
+      margin: 5px 0;
+      cursor: pointer;
+    }
+
+
+    .options:hover .dropdown {
+      display: block;
+    }
+
+    .menu-btn {
+      background: #ccc;
+      padding: 5px 10px;
+      border: none;
+      color: black;
+      font-weight: bold;
+    }
+    .modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+  margin: auto;
+}
+
+.closeBtn {
+  float: right;
+  cursor: pointer;
+  font-size: 20px;
+}
+.modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+  margin: auto;
+}
+
+.closeLoginBtn {
+  float: right;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+  </style>
+
+</head>
+<body>
+  <header>
+        <h3>User-Account</h3>
+  </header>
+<div class="mainContainer">
+ <div class="profile">
+    <div class="image"><img src="../image/user.png" alt="user-image"></div>
+    <div class="username">User name</div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="actions">
+    <button id="goToPageBtn" class="create">Create a new company</button>
+    <button id="editBtn" class="create">Edit profile</button>
+    <div id="editModal" class="modal">
+      <div class="modal-content">
+        <span class="closeBtn">&times;</span>
+        <h3>Edit Profile</h3>
+        <input type="text" placeholder="username" id="username"><br>
+        <input type="email" id="email" placeholder="Email"><br>
+        <input type="tel" id="phone" placeholder="Phone Number"><br>
+        <button id="saveBtn">Save Changes</button>
+      </div>
+    </div>
+   
+    <div class="options">
+       <button class="menu-btn">☰</button>
+         <div class="dropdown">
+            <div>help & support</div>
+            <div onclick="window.location.href='../settings/general.html'">settings</div>
+            <div id="logout">logout</div>
+         </div>
+    </div>  
+  </div>
+
+  <!-- Company Section -->
+  <div class="company-section">
+    <h3>Company List</h3>
+    <div class="search-box">
+      <input type="text" placeholder="Search company">
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <div class="tab my-company">my company</div>
+      <div class="tab shared">company shared with me</div>
+    </div>
+
+    <!-- Company Card -->
+    <div class="company-card">
+      <div class="title">COMPANY 1</div>
+       <div style="display: flex; align-items: center;">
+        <button id="openBtn" class="openBtn">OPEN</button>
+        <div id="loginModal" class="modal">
+         <div class="modal-content">
+            <span class="closeLoginBtn">&times;</span>
+            <h3>Company Login</h3>
+            <input type="text" id="loginUsername" placeholder="Username"><br>
+            <input type="password" id="loginPassword" placeholder="Password"><br>
+            <button id="loginSubmitBtn">Login</button>
+         </div>
+        </div>
+        <div class="options">
+          <button class="menu-btn">☰</button>
+          <div class="dropdown">
+            <div>RENAME</div>
+            <div>OPEN</div>
+            <div>DELETE</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ </div>
+ 
+<script>
+    document.getElementById("goToPageBtn").addEventListener("click", function () {
+    window.location.href = "create-company.html"; // or "/about.html" depending on file structure
+});
+
+const modal = document.getElementById("editModal");
+const editBtn = document.getElementById("editBtn");
+const closeBtn = document.querySelector(".closeBtn");
+
+editBtn.onclick = () => modal.style.display = "flex";
+closeBtn.onclick = () => modal.style.display = "none";
+window.onclick = (e) => {
+  if (e.target === modal) modal.style.display = "none";
+};
+const loginModal = document.getElementById("loginModal");
+const openBtn = document.getElementById("openBtn");
+const closeLoginBtn = document.querySelector(".closeLoginBtn");
+
+openBtn.onclick = () => loginModal.style.display = "flex";
+closeLoginBtn.onclick = () => loginModal.style.display = "none";
+window.onclick = (e) => {
+  if (e.target === loginModal) loginModal.style.display = "none";
+};
+
+// Handle login (you can customize this with Firebase later)
+document.getElementById("loginSubmitBtn").onclick = () => {
+  const username = document.getElementById("loginUsername").value;
+  const password = document.getElementById("loginPassword").value;
+
+  console.log("Login with:", username, password);
+  // Here you can use Firebase Authentication to check credentials
+};
+
+document.getElementById("logout").addEventListener("click",  () => {
+  signOut(auth).then(() => {
+    window.location.href = "login.html";
+  }).catch((error) => {
+    console.error("Logout failed:", error);
+  });
+   
+});
+ </script>
+</body>
+</html>

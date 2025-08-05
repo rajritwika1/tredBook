@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cash N Bank</title>
+    <script src="https://kit.fontawesome.com/1e18fc97cb.js" crossorigin="anonymous"></script>
+
+<style>
+ *{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+.sidebar {
+  width: 250px;
+  background: #333;
+  color: white;
+  padding: 15px;
+  transition: all 0.3s;
+}
+
+.sidebar .company-title {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.nav li {
+  list-style: none;
+  margin: 10px 0;
+}
+
+.nav li a {
+  color: white;
+  text-decoration: none;
+  background: black;
+  display: block;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.adv-sec {
+  background: #999;
+  padding: 20px;
+  margin-top: 20px;
+}
+.hidden {
+  display: none;
+}
+.menu-toggle {
+  background: transparent;
+  font-size: 24px;
+  border: none;
+  cursor: pointer;
+}
+.main {
+  flex: 1;
+  background: transparent;
+  padding: 20px;
+  position: relative;
+}
+
+.header {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.top-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.btn {
+  padding: 10px;
+  width: 100px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  background-color: transparent;
+  text-align: left;
+}
+
+.yellow {
+  background-color: #ffff99;
+}
+
+.green {
+  background-color: #a8fdfd;
+}
+
+.icon {
+  background-color: #a8fdfd;
+}
+
+
+.tab {
+  padding: 10px;
+  background-color: #ccc;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  flex: 1;
+  text-align: center;
+}
+
+.tab.active {
+  background-color: #a8fdfd;
+  font-weight: bold;
+}
+
+.icons {
+  margin-top: 10px;
+  font-size: 1.2rem;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.adv-section {
+  background-color: #ccc;
+  padding: 20px;
+  text-align: center;
+  margin-top: 20px;
+  border-radius: 5px;
+}
+
+ .drop-btn{
+ background-color: #3498db;
+  color: #333;
+  padding: 10px 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;  color: #333;
+
+    }
+    .dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  background-color: #3498db;
+  color: white;
+  padding: 10px 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.dropdown-cont {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 4px;
+}
+
+.dropdown-cont a {
+  color: black;
+  padding: 10px 14px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-cont a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-cont {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #2980b9;
+}
+
+
+.transaction
+{
+    display: flex;
+    align-items: left;
+    flex-direction: column;
+}
+.transaction span{
+    color: #2980b9;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    overflow-x: auto;
+  }
+
+  .main-content {
+    padding: 10px;
+  }
+
+  .top-bar,
+  .tabs,
+  .quick-links {
+    flex-direction: column;
+  }
+
+  .card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .meta {
+    text-align: left;
+    margin-top: 10px;
+  }
+}
+
+
+
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar" id="sidebar">
+      <h3 class="company-title">Company Name Here</h3>
+      <ul class="nav">
+        <li><a href="../dashboard/dashboard.html">Dashboard</a></li>
+        <li><a href="../home/home.html">Home</a></li>
+        <li><a href="../party/parties.html">Parties</a></li>
+        <li><a href="../items/items.html">Items</a></li>
+        <li><a href="../sales/sales.html">Sales</a></li>
+        <li><a href="../purchase&expenses/purchase-dropdown.html">Purchase</a></li>
+        <li><a href="../income-expense/income-expense-dropdown.html">Income & expense</a></li>
+        <li><a href="../cash-n-bank/cash-n-bank-dropdown.html">Cash & Bank</a></li>
+        <li><a href="../reports/reports.html">Reports</a></li>
+        <li><a href="../utilities/utilities.html">Utilities</a></li>
+        <li><a href="../extras/extras.html">Extras</a></li>
+        <li><a href="../settings/general.html">Settings</a></li>
+      </ul>
+      <div class="adv-sec">adv sec</div>
+    </div>
+    <div class="main">
+        <div class="header">
+          <button class="menu-toggle" id="menuToggle">:</button>
+      <input type="text" placeholder="Search txns" />       
+      <button class="btn green">Add Sales +</button>
+        <button class="btn green">Add Purchase +</button>
+            <button class="drop-btn" ><i class="fas fa-plus"></i></button>
+            <button class="drop-btn"><i class="fas fa-bell"></i></button>
+        <button class="drop-btn"><i class="fas fa-bars"></i></button>
+         
+          </div>
+          <div class="transaction">
+        <span><strong>Transactions</strong></span>
+        <button class="btn" onclick="window.location.href='../reports/reports.html'">Sales report</button>
+        <button class="btn" onclick="window.location.href='../reports/purchase-report.html'">Purchase report</button>
+        <button class="btn" onclick="window.location.href='../reports/day-book.html'">Day report</button>
+        <button class="btn" onclick="window.location.href='../reports/all-transactions.html'">All transactions</button>
+        <button class="btn" onclick="window.location.href='../reports/bill-wise-profit.html'">Bill wise profit</button>
+        <button class="btn">Profit & loss</button>
+        <button class="btn">Sales aging  report</button>
+        <button class="btn">Purchase aging report</button>
+        <button class="btn">Cashflow</button>
+        <button class="btn">Balance sheet</button>
+        <span><strong>Party reports</strong></span>
+        <button class="btn">Party statements </button>
+        <button class="btn">Party wise profit & loss</button>
+        <button class="btn">All parties report</button>
+        <button class="btn">Party report by item</button>
+        <button class="btn">Sale/purchase by party</button>
+        <button class="btn">Sale/purchase by party groups</button>
+        <span><strong>Item/stock reports</strong></span>
+        <button class="btn">Stock summary report</button>
+        <button class="btn">Item report by party</button>
+        <button class="btn">Item wise profit & loss</button>
+        <button class="btn">Low stock summary report</button>
+        <button class="btn">Item detail report</button>
+        <button class="btn">Stock detail report</button>
+        <button class="btn">Sale/purchase by item category</button>
+        <button class="btn">Stock summary by item category</button>
+        <button class="btn">Item batch report</button>
+        <button class="btn">Item serial report</button>
+        <button class="btn">Godown wise stocks</button>
+        <button class="btn">Item wise discount</button>
+        <button class="btn">Manufacturing report</button>
+        <button class="btn">Consumption report</button>
+        <span><strong>Business status</strong></span>
+        <button class="btn">Sale/purchase order txns report</button>
+        <button class="btn">Sale/purchase order item report</button>
+        <span><strong>Other income report</strong></span>
+        <button class="btn">Other income txns report</button>
+        <button class="btn">Other income category report</button>
+        <button class="btn">Other income item report</button>
+        <span><strong>Expense report</strong></span>
+        <button class="btn">Expense txns report</button>
+        <button class="btn">Expense category report</button>
+        <button class="btn">Expense item report</button>
+        <span><strong>Taxes</strong></span>
+        <button class="btn">gst reports</button>
+        <button class="btn">gst rate report</button>
+        <button class="btn">Form no. 27EQ</button>
+        <button class="btn">TCS Receivables</button>
+        <button class="btn">Tds Receivables</button>
+        <span><strong>gst reports</strong></span>
+        <button class="btn">gstr-1</button>
+        <button class="btn">gstr-2</button>
+        <button class="btn">gstr-3B</button>
+        <button class="btn">GST transaction report</button>
+        <button class="btn">gstr-9</button>
+        <button class="btn">Sale summary by HSN</button>
+        <button class="btn">SAC report</button>
+        <span><strong>Extras reports</strong></span>
+        <button class="btn">Loan/girvi report</button>
+        <button class="btn">Godown report</button>
+</div>
+  
+    </div>
+
+      
+<script>
+
+const toggleBtn = document.getElementById('menuToggle');
+const sidebar = document.getElementById('sidebar');
+
+toggleBtn.addEventListener('click', () => {
+  sidebar.classList.toggle('hidden');
+});
+
+</script>
+</body>
+</html>

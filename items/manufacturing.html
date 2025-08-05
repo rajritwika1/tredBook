@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manufacturing Cost</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="top-bar">
+    <button class="back-btn" onclick="closeRawMaterialModal()">⬅</button>
+    <span class="title">manufacturing</span>
+  </div>
+
+  <div class="summary">
+    <div>raw materials<br><strong>$250</strong></div>
+    <div>additional cost<br><strong>$250</strong></div>
+    <div>total cost<br><strong>$500</strong></div>
+  </div>
+
+  <!-- Raw Material Section -->
+  <div class="section raw-material">
+    <div class="section-header">
+      <h3>raw material <span>(<span id="rm-count">0</span>)</span></h3>
+      <small>for 1 [item name]</small>
+      <button onclick="addRawMaterial()">+ add more</button>
+      <!-- Raw Material Modal -->
+<div id="rawMaterialModal" class="modal">
+  <div class="modal-content">
+    <div class="top-bar">
+      <button class="back-btn" onclick="closeRawMaterialModal()">⬅</button>
+      <span class="title">add raw material</span>
+    </div>
+
+    <div class="form-section">
+      <label>add raw material</label>
+      <input type="text" id="rm-name" placeholder="Enter name" />
+
+      <div class="row">
+        <div class="column">
+          <label>quantity</label>
+          <input type="number" id="rm-qty" oninput="updateEstimatedCost()" />
+        </div>
+        <div class="column">
+          <label>unit</label>
+          <input type="text" id="rm-unit" />
+        </div>
+      </div>
+
+      <label>purchase rate (price/unit)</label>
+      <input type="number" id="rm-rate" oninput="updateEstimatedCost()" />
+
+      <div class="cost-box">
+        estimated cost : <span id="rm-estimated">0</span>
+      </div>
+
+      <div class="btn-row">
+        <button onclick="saveAndNew()">save & new</button>
+        <button onclick="saveRawMaterial()">save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </div>
+    <div id="rawMaterialContainer"></div>
+  </div>
+
+  <!-- Additional Cost Section -->
+  <div class="section additional-cost">m
+    <div class="section-header">
+      <h3>additional cost <span>(<span id="ac-count">0</span>)</span></h3>
+      <small>for 1 [item name]</small>
+      <button onclick="addAdditionalCost()">+ add more</button>
+      <!-- Additional Cost Modal -->
+<div id="additionalCostModal" class="modal">
+  <div class="modal-content">
+    <div class="top-bar">
+      <span class="title">add additional cost</span>
+      <button class="close-btn" onclick="closeModal('additionalCostModal')">✕</button>
+    </div>
+
+    <div class="form-section">
+      <label>select charges</label>
+      <input type="text" id="ac-charge" placeholder="e.g. Labour charge" />
+
+      <label>estimated cost</label>
+      <input type="number" id="ac-cost" />
+
+      <div class="btn-row">
+        <button onclick="saveAndNew('ac')">save & new</button>
+        <button onclick="saveAdditionalCost()">save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </div>
+    <div class="payment-type">payment type : <strong>cash ⌄</strong></div>
+    <div id="additionalCostContainer"></div>
+  </div>
+
+  <button class="save-btn">save</button>
+
+  <script src="script.js"></script>
+  <script>
+    function goBack() {
+  window.history.back();
+}
+
+  </script>
+</body>
+</html>

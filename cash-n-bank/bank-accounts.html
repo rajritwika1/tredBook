@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Accounts</title>
+    <script src="https://kit.fontawesome.com/1e18fc97cb.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: transparent;
+            color: black;
+            padding: 10px 20px;
+        }
+        .header span {
+            font-size: 1.5em;
+        }
+        .search-input {
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .sub-container {
+            display: flex;
+            justify-content: space-between;
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+        }
+        .sub-cont {
+            margin-bottom: 5px;
+        }
+        .bottom {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+        }.hidden {
+            display: none;
+        }
+        .mid
+        {
+            flex-direction: column;
+            padding: 10px;
+            
+        }.sub-mid{
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .dropbtn {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .bank-detail {
+            margin-bottom: 15px;
+        }
+        .footer {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+      .modal{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: none;
+        z-index:999;
+        background-color: #ccc;
+    }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="header">
+            <button class="back-btn" id="backBtn">⬅</button>
+            <span><strong>Bank Account List</strong></span>
+            <input type="text" placeholder="Search bank name" class="search-input">
+
+        </div>
+        <div class="container">
+            <div class="sub-container">
+               <div class="content">
+                <div class="sub-cont">Bank Name</div>
+                <div class="sub-cont">account no. here</div>
+               </div> 
+               <div class="content">$5000</div>
+            </div>
+             <div class="sub-container">
+               <div class="content">
+                <div class="sub-cont">Bank Name</div>
+                <div class="sub-cont">account no. here</div>
+                <div class="sub-cont">online payments</div>
+               </div> 
+               <div class="content">
+                <div class="sub-cont">$5000</div>
+                <div class="sub-cont">printings</div>
+               </div>
+            </div>
+             <div class="sub-container">
+               <div class="content">
+                <div class="sub-cont">Bank Name</div>
+                <div class="sub-cont">account no. here</div>
+               </div> 
+               <div class="content">$5000</div>
+            </div>
+        </div>
+        <div class="mid hidden" id="midSection">
+            <div class="sub-mid">
+                <button class="dropbtn">cash to bank transfer</button> 
+                <button class="dropbtn">bank to cash transfer</button>
+            </div>
+             <div class="sub-mid">
+                <button class="dropbtn" id="bankToBankTransferBtn">bank to bank transfer</button> 
+                <div class="modal" id="bankToBankTransferModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="header">
+            <button class="back-btn" onclick="closeModal()">⬅</button>
+            <span><strong>Bank to Bank Transfer</strong></span>
+        </div>
+        <div class="container">
+            <div class="sub-cont">
+                <span>Transfer date</span>
+                <input type="date" class="input-field">
+            </div>
+            <div class="sub-cont">
+                <span>deposit to</span>
+                <select>
+                    <option value="bank-name">Select Bank</option>
+                    <option value="bank-name">PNB</option>
+                    <option value="bank-name">HDFC</option>
+                    <option value="bank-name">ICICI</option>
+                </select>
+            </div>
+            <div class="sub-cont">
+                <span>withdraw from</span>
+                <select>
+                    <option value="bank-name">Select Bank</option>
+                    <option value="bank-name">PNB</option>
+                    <option value="bank-name">HDFC</option>
+                    <option value="bank-name">ICICI</option>
+                </select>
+            </div>
+            <div class="sub-cont">
+                <span>Amount</span>
+                <input type="number" class="input-field" placeholder="Enter amount">
+            </div>
+            <div class="sub-cont">
+                <span>Description</span>
+                <input type="text" class="input-field" placeholder="Enter description">
+            </div>
+            <div class="sub-cont">
+                <span>attach images</span>
+                <input type="file" accept="image/*" class="input-field">
+            </div>
+         </div>
+        <div class="footer">
+            <button class="dropbtn">save</button>
+        </div>
+        </div>
+        </div>
+                <button class="dropbtn" id="adjustBalanceBtn">adjust balance</button>
+
+            </div>
+        </div>
+        
+        <div class="bottom">
+            <button class="dropbtn" id="openModalBtn">add bank</button>
+            <button class="dropbtn" id="toggleMidBtn">deposit/withdraw</button>
+        </div>
+      </div>
+        <div class="modal" id="addBankModal">
+           <div class="modal-overlay"></div>
+           <div class="modal-content">
+             <div class="header">
+                <button class="back-btn" onclick="closeModal()">⬅</button>
+                <span><strong>Add Bank Account</strong></span>
+            </div>
+            <div class="container">
+                <div class="bank-detail">
+                    <input type="text" placeholder="Bank Name" class="input-field">
+                </div>            
+                <div class="bank-detail">
+                    <input type="text" placeholder="opening balance">
+                    <input type="date">
+                </div>
+                <span>print bank details on invoices</span>
+                <input type="text" placeholder="Account holder name here" class="input-field">
+                <input type="number" placeholder="Account number here" class="input-field">
+                <input type="text" placeholder="IFSC code here" class="input-field">
+                <input type="text" placeholder="Branch name, address here" class="input-field">
+                <span>print upi qr on invoices</span>
+                <div class="bank-detail" style="display: flex;">
+                    <input type="email" placeholder="upi id here" class="input-field">
+                    <input type="file" accept="image/*" class="input-field">
+                </div>
+            </div>
+            <div class="footer">
+                <button class="dropbtn">save</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="adjustBalanceModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="header">
+            <button class="back-btn" onclick="closeModal()">⬅</button>
+            <span><strong>Adjust Balance</strong></span>
+        </div>
+        <div class="container">
+            <div class="sub-cont">
+                <span>Transfer date</span>
+                <input type="date" class="input-field">
+            </div>
+            <div class="sub-cont">
+                <span>type</span>
+                <select>
+                    <option value="bank-name">Select type</option>
+                    <option value="bank-name">Add balance</option>
+                    <option value="bank-name">Reduce balance</option>
+                </select>
+            </div>
+            <div class="sub-cont">
+                <span>Amount</span>
+                <input type="number" class="input-field" placeholder="Enter amount">
+            </div>
+            <div class="sub-cont">
+                <span>Description</span>
+                <input type="text" class="input-field" placeholder="Enter description">
+            </div>
+            <div class="sub-cont">
+                <span>attach images</span>
+                <input type="file" accept="image/*" class="input-field">
+            </div>
+        <div class="footer">
+            <button class="dropbtn">save</button>
+        </div>
+        </div>
+    </div>
+    
+    <script>
+       
+        document.getElementById('toggleMidBtn').addEventListener('click', function() {
+            const midSection = document.getElementById('midSection');
+            midSection.classList.toggle('hidden');
+        });
+        const modal = document.getElementById("addBankModal");
+        const openBtn = document.getElementById("openModalBtn");
+
+        openBtn.addEventListener("click", function() {
+            modal.style.display = "block";
+        });
+
+        function closeModal() {
+            modal.style.display = "none";
+        }
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }       
+        const bankToBankTransferModal = document.getElementById('bankToBankTransferModal');
+        const bankToBankTransferBtn = document.getElementById('bankToBankTransferBtn'); 
+        bankToBankTransferBtn.addEventListener('click', function() {
+            bankToBankTransferModal.style.display = 'block';
+        });
+        function closeModal() {
+            bankToBankTransferModal.style.display = 'none';
+        }
+        const adjustBalanceBtn = document.getElementById('adjustBalanceBtn');
+        const adjustBalanceModal = document.getElementById('adjustBalanceModal');   
+        adjustBalanceBtn.addEventListener('click', function() {
+            adjustBalanceModal.style.display = 'block';
+        });
+        function closeModal() {
+            adjustBalanceModal.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
